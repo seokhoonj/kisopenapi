@@ -1,0 +1,15 @@
+Package: kisopenapi
+Title: Korea Investment & Securities Open Trading API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Seokhoon", family = "Joo", role = c("aut", "cre"),
+           email = "seokhoonj@gmail.com")
+Description: API Wrapper to use Korea Investment & Securities trading system.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.2.0)
+Imports:
+  httr2 (>= 0.2.2),
+  jsonlite (>= 1.8.4)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3

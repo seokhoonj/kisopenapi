@@ -28,7 +28,7 @@ get_current_price <- function(stock_no) {
     "fid_input_iscd" = stock_no
   )
   res <- request(url) |> req_headers(!!!headers) |> req_url_query(!!!params) |>
-    req_perform() |> req_error()
+    req_perform()
   resp <- res |> resp_body_json()
   if (res$status_code == 200 & resp$rt_cd == "0") {
     return(resp)

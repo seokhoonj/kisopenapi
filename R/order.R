@@ -6,18 +6,22 @@
 #' @param stock_code A string specifying stock code
 #' @param order_qty A numeric or string specifying order quantity
 #' @param order_price A numeric or string specifying order price
+#' @param prdt_code A string specifying account product code
 #' @param buy_flag A boolean specifying flag
 #' @param order_type A string specifying order type
 #'
 #' @return An order result
-kis_order <- function(stock_code, order_qty, order_price, order_type = "00",
-                      buy_flag = TRUE) {
+kis_order <- function(stock_code, order_qty, order_price, prdt_code,
+                      order_type = "00", buy_flag = TRUE) {
   api_url <- "uapi/domestic-stock/v1/trading/order-cash"
   tr_id <- if (buy_flag) "TTTC0802U" else "TTTC0801U"
 
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
+
   params <- lapply(list(
     "CANO" = get_cano(),
-    "ACNT_PRDT_CD" = get_acnt_prdt_cd(),
+    "ACNT_PRDT_CD" = prdt_code,
     "PDNO" = stock_code,
     "ORD_DVSN" = order_type,
     "ORD_QTY" = order_qty,
@@ -35,19 +39,24 @@ kis_order <- function(stock_code, order_qty, order_price, order_type = "00",
 
 #' @rdname kis_order
 #' @export
-kis_buy <- function(stock_code, order_qty, order_price, order_type = "00") {
+kis_buy <- function(stock_code, order_qty, order_price, prdt_code,
+                    order_type = "00") {
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
   kis_order(
     stock_code = stock_code, order_qty = order_qty, order_price = order_price,
-    order_type = order_type, buy_flag = TRUE
+    prdt_code = prdt_code, order_type = order_type, buy_flag = TRUE
   )
 }
 
 #' @rdname kis_order
 #' @export
 kis_sell <- function(stock_code, order_qty, order_price, order_type = "00") {
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
   kis_order(
     stock_code = stock_code, order_qty = order_qty, order_price = order_price,
-    order_type = order_type, buy_flag = FALSE
+    prdt_code = prdt_code, order_type = order_type, buy_flag = FALSE
   )
 }
 
@@ -90,5 +99,17 @@ get_orders <- function() {
                    hash_flag = TRUE)
 
   resp <- res |> resp_body_json()
-  return(data.table::rbindlist(resp$output))
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      return(data.frame(data.table::rbindlist(resp$output)))
+    } else if (resp$msg_cd == "EGW00123") {
+      set_auth()
+      get_orders()
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
 }

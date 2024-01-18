@@ -12,6 +12,7 @@ kis_revise_cancel(
   order_branch,
   order_qty,
   order_price,
+  prdt_code,
   order_dv = "00",
   cncl_dv = c("01", "02"),
   qty_all_yn = c("Y", "N")
@@ -22,6 +23,7 @@ kis_revise(
   order_branch,
   order_qty,
   order_price,
+  prdt_code,
   order_dv = "00",
   cncl_dv = "01",
   qty_all_yn = c("Y", "N")
@@ -32,6 +34,7 @@ kis_cancel(
   order_branch,
   order_qty,
   order_price,
+  prdt_code,
   order_dv = "00",
   cncl_dv = "02",
   qty_all_yn = c("Y", "N")
@@ -47,6 +50,8 @@ kis_cancel_all()
 \item{order_qty}{A numeric or string specifying order quantity}
 
 \item{order_price}{A numeric or string specifying order price}
+
+\item{prdt_code}{A string specifying account product code}
 
 \item{order_dv}{A string specifying limit order(00) or market order(01)}
 

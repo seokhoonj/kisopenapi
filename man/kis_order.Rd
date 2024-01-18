@@ -10,11 +10,12 @@ kis_order(
   stock_code,
   order_qty,
   order_price,
+  prdt_code,
   order_type = "00",
   buy_flag = TRUE
 )
 
-kis_buy(stock_code, order_qty, order_price, order_type = "00")
+kis_buy(stock_code, order_qty, order_price, prdt_code, order_type = "00")
 
 kis_sell(stock_code, order_qty, order_price, order_type = "00")
 }
@@ -24,6 +25,8 @@ kis_sell(stock_code, order_qty, order_price, order_type = "00")
 \item{order_qty}{A numeric or string specifying order quantity}
 
 \item{order_price}{A numeric or string specifying order price}
+
+\item{prdt_code}{A string specifying account product code}
 
 \item{order_type}{A string specifying order type}
 

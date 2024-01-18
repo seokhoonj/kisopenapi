@@ -75,3 +75,42 @@ get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
     cat(sprintf("Error Code : %s\n", res$status_code))
   }
 }
+
+#' @title get stock investor
+#'
+#' @description
+#' Get stock investor data using KIS API.
+#'
+#' @param stock_code A string specifying stock code
+#' @return stock investor data frame
+#'
+#' @examples
+#' ## get stock investor
+#' \dontrun{get_stock_investor("005930")}
+#'
+#' @export
+get_stock_investor <- function(stock_code) {
+  api_url <- "uapi/domestic-stock/v1/quotations/inquire-investor"
+  tr_id <- "FHKST01010900"
+
+  params <- list(
+    "FID_COND_MRKT_DIV_CODE" = "J",
+    "FID_INPUT_ISCD" = stock_code
+  )
+
+  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      return(data.frame(data.table::rbindlist(resp$output)))
+    } else if (resp$msg_cd == "EGW00123") {
+      set_auth()
+      get_stock_investor(stock_code)
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
+}

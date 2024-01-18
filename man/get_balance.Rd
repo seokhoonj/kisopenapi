@@ -4,7 +4,10 @@
 \alias{get_balance}
 \title{get account balance}
 \usage{
-get_balance()
+get_balance(prdt_code)
+}
+\arguments{
+\item{prdt_code}{A string specifying account product code}
 }
 \value{
 balance data.frame

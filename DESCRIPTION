@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
 Imports:
-  cli (>= 3.6.1),
+  cli (>= 3.3.0),
   data.table (>= 1.14.2),
   httr2 (>= 0.2.2),
   jsonlite (>= 1.8.0)

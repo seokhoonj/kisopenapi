@@ -2,10 +2,8 @@
 
 ## Introduction
 
-Korea Investment & Securites Open Trading API using R (In-development) 
-<!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/kisopenapi)](https://CRAN.R-project.org/package=kisopenapi)
-[![R-CMD-check](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml)
+Korea Investment & Securites Open Trading API using R (In-development) <!-- badges: start --> [![CRAN status](https://www.r-pkg.org/badges/version/kisopenapi)](https://CRAN.R-project.org/package=kisopenapi) [![R-CMD-check](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 ## Installation
@@ -43,4 +41,4 @@ kis_cancel_all()
 
 ## Reference
 
-KIS github repo: [https://github.com/koreainvestment/open-trading-api/tree/main](https://github.com/koreainvestment/open-trading-api/tree/main)
+-   KIS github repo: <https://github.com/koreainvestment/open-trading-api/tree/main>

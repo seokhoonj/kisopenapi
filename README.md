@@ -10,9 +10,13 @@ Korea Investment & Securites Open Trading API using R (In-development)
 
 ## Introduction
 
--   This package is created for R users, referring to the Korea Investment & Securities Open Trading API. (해당 패키지는 한국투자증권 Open Trading API를 참조하여, R 사용자가 활용할 수 있게 일부 재구성한 것입니다.)
+-   This package is created for R users, referring to the Korea Investment & Securities Open Trading API.
 
--   First, open an account Korea Investment & Securites and then generate an app key and app secret from `https://apiportal.koreainvestment.com/` (먼저 계좌를 개설한 후 `https://apiportal.koreainvestment.com/`에서 app key와 app secret을 생성합니다.)
+-   First, open an account Korea Investment & Securites and then generate an app key and app secret from `https://apiportal.koreainvestment.com/`
+
+-   해당 패키지는 한국투자증권 Open Trading API를 참조하여, R 사용자가 활용할 수 있게 일부 재구성한 것입니다.
+
+-   먼저 계좌를 개설한 후 `https://apiportal.koreainvestment.com/`에서 app key와 app secret을 생성합니다.
 
 ## Installation
 

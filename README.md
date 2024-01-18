@@ -43,6 +43,4 @@ kis_cancel_all()
 
 ## Reference
 
-``` r
 KIS github repo: [https://github.com/koreainvestment/open-trading-api/tree/main](https://github.com/koreainvestment/open-trading-api/tree/main)
-```

@@ -10,10 +10,10 @@ get_stock_investor(stock_code)
 \item{stock_code}{A string specifying stock code}
 }
 \value{
-stock investors data frame
+stock investor data frame
 }
 \description{
-Get stock investors data using KIS API.
+Get stock investor data using KIS API.
 }
 \examples{
 ## get stock investor

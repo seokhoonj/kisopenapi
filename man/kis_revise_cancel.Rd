@@ -63,5 +63,5 @@ kis_cancel_all()
 response
 }
 \description{
-Revise & Cancel orders.
+Revise and cancel orders.
 }

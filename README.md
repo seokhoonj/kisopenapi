@@ -1,12 +1,14 @@
 # kisopenapi package
 
-<!-- badges: start --> 
+<!-- badges: start -->
+
 [![CRAN status](https://www.r-pkg.org/badges/version/kisopenapi)](https://CRAN.R-project.org/package=kisopenapi) [![R-CMD-check](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/seokhoonj/kisopenapi/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 ## Introduction
 
-Korea Investment & Securites Open Trading API using R (In-development) 
+Korea Investment & Securites Open Trading API using R (In-development)
 
 ## Installation
 

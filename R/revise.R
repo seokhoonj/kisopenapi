@@ -1,0 +1,102 @@
+#' @title KIS revise and cancel orders
+#'
+#' @description
+#' Revise & Cancel orders.
+#'
+#' @param order_no A string specifying order number
+#' @param order_branch A string specifying branch code
+#' @param order_qty A numeric or string specifying order quantity
+#' @param order_price A numeric or string specifying order price
+#' @param order_dv A string specifying limit order(00) or market order(01)
+#' @param cncl_dv A string specifying revise(01) or cancel(02)
+#' @param qty_all_yn A string specifying total order quantity or not
+#'
+#' @return response
+kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
+                              order_dv = "00", cncl_dv = c("01", "02"),
+                              qty_all_yn = c("Y", "N")) {
+  api_url <- "uapi/domestic-stock/v1/trading/order-rvsecncl"
+  tr_id <- "TTTC0803U"
+
+  params <- lapply(list(
+    "CANO" = get_cano(),
+    "ACNT_PRDT_CD" = get_acnt_prdt_cd(),
+    "KRX_FWDG_ORD_ORGNO" = order_branch, # ord_gno_brno column
+    "ORGN_ODNO" = order_no, # odno column
+    "ORD_DVSN" = order_dv, # LIMIT ORDER (00), MARKET ORDER (01)
+    "RVSE_CNCL_DVSN_CD" = cncl_dv[[1L]], # REVISE (01), CANCEL(02)
+    "ORD_QTY" = order_qty,
+    "ORD_UNPR" = order_price,
+    "QTY_ALL_ORD_YN" = qty_all_yn[[1L]]
+  ), as.character)
+
+  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
+                   post_flag = TRUE)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
+    } else if (resp$msg1 == "EGW00123") {
+      set_auth()
+      kis_revise_cancel(
+        order_no = order_no, order_branch = order_branch,
+        order_qty = order_qty, order_price = order_price,
+        order_dv = order_dv, cncl_dv = cncl_dv,
+        qty_all_yn = qty_all_yn
+      )
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
+}
+
+#' @rdname kis_revise_cancel
+#' @export
+kis_revise <- function(order_no, order_branch, order_qty, order_price,
+                       order_dv = "00", cncl_dv = "01",
+                       qty_all_yn = c("Y", "N")) {
+  kis_revise_cancel(
+    order_no = order_no,
+    order_branch = order_branch,
+    order_qty = order_qty,
+    order_price = order_price,
+    order_dv = order_dv,
+    cncl_dv = cncl_dv,
+    qty_all_yn = qty_all_yn[[1L]]
+  )
+}
+
+#' @rdname kis_revise_cancel
+#' @export
+kis_cancel <- function(order_no, order_branch, order_qty, order_price,
+                       order_dv = "00", cncl_dv = "02",
+                       qty_all_yn = c("Y", "N")) {
+  kis_revise_cancel(
+    order_no = order_no,
+    order_branch = order_branch,
+    order_qty = order_qty,
+    order_price = order_price,
+    order_dv = order_dv,
+    cncl_dv = cncl_dv,
+    qty_all_yn = qty_all_yn[[1L]]
+  )
+}
+
+#' @rdname kis_revise_cancel
+#' @export
+kis_cancel_all <- function() {
+  orders <- get_orders()
+  order_list <- as.numeric(orders$odno)
+  qty_list <- orders$ord_qty
+  price_list <- orders$ord_unpr
+  branch_list <- orders$ord_gno_brno
+  n <- nrow(orders)
+  for (i in seq_len(n)) {
+    kis_cancel(order_list[i], qty_list[i], price_list[i], branch_list[i])
+    Sys.sleep(.2)
+  }
+}

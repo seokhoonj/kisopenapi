@@ -4,7 +4,7 @@
 \alias{set_auth}
 \alias{get_auth}
 \alias{print_auth}
-\title{set authentification}
+\title{set access token}
 \usage{
 set_auth()
 
@@ -13,7 +13,7 @@ get_auth()
 print_auth()
 }
 \description{
-Get access token using kis api key and kis api secret.
+Set access token using kis app key and kis app secret.
 }
 \examples{
 # set authentification

@@ -1,8 +1,7 @@
-
-#' @title set authentification
+#' @title set access token
 #'
 #' @description
-#' Get access token using kis api key and kis api secret.
+#' Set access token using kis app key and kis app secret.
 #'
 #' @examples
 #' # set authentification
@@ -10,29 +9,34 @@
 #'
 #' @export
 set_auth <- function() {
-  url_base <- "https://openapi.koreainvestment.com:9443"
-  path <- "uapi/domestic-stock/v1/quotations/inquire-price"
+  base_url <- "https://openapi.koreainvestment.com:9443"
+  api_url <- "oauth2/tokenP"
+  url <- sprintf("%s/%s", base_url, api_url)
   headers <- list("content-type" = "application/json")
-  body <- list(
+  params <- list(
     "grant_type" = "client_credentials",
-    "appkey" = get_kis_api_key(),
-    "appsecret" = get_kis_api_secret()
+    "appkey" = get_app_key(),
+    "appsecret" = get_app_secret()
   )
-  path <- "oauth2/tokenP"
-  url <- sprintf("%s/%s", url_base, path)
   res <- request(url) |> req_headers(headers = headers) |>
-    req_body_json(body) |> req_perform() |> resp_body_json()
-  Sys.setenv(KIS_ACCESS_TOKEN = res$access_token)
-  return(res)
+    req_body_json(params) |> req_perform()
+  resp <- res |> resp_body_json()
+  Sys.setenv(KIS_ACCESS_TOKEN = resp$access_token)
+  Sys.setenv(KIS_ACCESS_TOKEN_EXPIRED = resp$access_token_token_expired)
+  return(resp$access_token)
 }
 
 ##' @export
 ##' @rdname set_auth
 get_auth <- function() {
   access_token <- Sys.getenv("KIS_ACCESS_TOKEN")
-  if (access_token == "") {
-    stop("Please run this code to provide your KIS access token: set_secret('your_access_token').",
+  access_token_expired <- Sys.getenv("KIS_ACCESS_TOKEN_EXPIRED")
+  if (access_token == "" | access_token_expired == "") {
+    stop("Please run this code to provide your KIS access token: set_auth().",
          call. = FALSE)
+  }
+  if (as.POSIXct(access_token_expired) - Sys.time() < 0) {
+    set_auth()
   }
   return(access_token)
 }

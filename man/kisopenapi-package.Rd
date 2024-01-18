@@ -6,17 +6,17 @@
 \alias{kisopenapi-package}
 \title{kisopenapi: Korea Investment & Securities Open Trading API}
 \description{
-To use this package, you will first need to get your API key and secret from
+To use this package, you will first need to get your app key and secret from
 the website \url{https://apiportal.koreainvestment.com/}. Once you have your
-key and secret, you can save those as environment variables for the current
-session using the \code{\link{set_kis_api_key}}, \code{\link{set_kis_api_secret}}
-function. Alternatively, you can set those permanently by adding the
+app key and secret, you can save those as environment variables for the
+current session using the \code{\link{set_app_key}}, \code{\link{set_app_secret}}
+functions. Alternatively, you can set those permanently by adding the
 following line to your .Renviron file:
-KIS_API_KEY = PASTE YOUR API KEY
-KIS_API_SECRET = PASTE YOUR API SECRET
-Any functions that require your API key and secret try to retrieve those via
-\code{Sys.getenv("KIS_API_KEY")}, \code{Sys.getenv("KIS_API_SECRET")}
-(unless API key and secret are explicitly specified as function arguments).
+KIS_APP_KEY = PASTE YOUR APP KEY
+KIS_APP_SECRET = PASTE YOUR APP SECRET
+Any functions that require your app key and secret try to retrieve those via
+\code{Sys.getenv("KIS_APP_KEY")}, \code{Sys.getenv("KIS_APP_SECRET")}
+(unless app key and secret are explicitly specified as function arguments).
 }
 \author{
 \strong{Maintainer}: Seokhoon Joo \email{seokhoonj@gmail.com}

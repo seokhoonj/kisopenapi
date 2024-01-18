@@ -7,8 +7,10 @@ Authors@R:
 Description: API Wrapper to use Korea Investment & Securities trading system.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Depends: R (>= 4.2.0)
+Depends: R (>= 3.5.0)
 Imports:
+  cli (>= 3.6.1),
+  data.table (>= 1.14.8),
   httr2 (>= 0.2.2),
   jsonlite (>= 1.8.4)
 Roxygen: list(markdown = TRUE)

@@ -26,5 +26,5 @@ get_balance <- function() {
 
   res <- url_fetch(api_url = api_url, tr_id = tr_id, params, post_flag = FALSE)
   resp <- res |> resp_body_json()
-  return(data.table::data.table(resp$output2[[1L]]))
+  return(data.frame(resp$output2[[1L]]))
 }

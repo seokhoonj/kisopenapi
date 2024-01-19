@@ -64,9 +64,13 @@ set_auth()
 get_balance()
 
 # get data (samsung electronics)
-# 가격 데이터 추출
+# 가격 데이터 추출 (삼성전자)
 get_current_price("005930")
 get_stock_history("005930")
+
+# get stock investors (samsung electronics)
+# 투자자 데이터 추출 (삼성전자)
+get_stock_investor("005930")
 
 # buy
 # 매수

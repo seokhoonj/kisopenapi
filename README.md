@@ -112,13 +112,13 @@ get_orders()
 # revise (get the order number and branch information via `get_orders()`)
 # 주문 정정 (`get_orders()` 함수를 통해 정보 취득)
 kis_revise(
-  order_no = "your order number", order_branch = "your order branch"
+  order_no = "your order number", order_branch = "your order branch",
   order_qty = 1, order_price = "price_you_want"
 )
 
 # cancel
 # 주문 취소
-kis_cancel_all()
+kis_cancel_all() # not work in paper trading environment?
 
 # Change the trading environment (real -> paper, paper -> real)
 # 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자

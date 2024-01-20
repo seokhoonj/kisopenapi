@@ -1,6 +1,6 @@
 
 generate_auth <- function() {
-  base_url <- "https://openapi.koreainvestment.com:9443"
+  base_url <- get_base_url()
   api_url <- "oauth2/tokenP"
   url <- sprintf("%s/%s", base_url, api_url)
   headers <- list("content-type" = "application/json")
@@ -12,15 +12,29 @@ generate_auth <- function() {
   res <- request(url) |> req_headers(headers = headers) |>
     req_body_json(params) |> req_perform()
   resp <- res |> resp_body_json()
-  Sys.setenv(KIS_ACCESS_TOKEN = resp$access_token)
-  Sys.setenv(KIS_ACCESS_TOKEN_EXPIRED = resp$access_token_token_expired)
+
+  is_paper <- is_paper_trading()
+  if (!is_paper) {
+    Sys.setenv("KIS_ACCESS_TOKEN" = resp$access_token)
+    Sys.setenv("KIS_ACCESS_TOKEN_EXPIRED" = resp$access_token_token_expired)
+  } else {
+    Sys.setenv("KIS_PAPER_ACCESS_TOKEN" = resp$access_token)
+    Sys.setenv("KIS_PAPER_ACCESS_TOKEN_EXPIRED" = resp$access_token_token_expired)
+  }
   return(resp$access_token)
 }
 
 url_fetch <- function(api_url, tr_id, params, append_headers, post_flag = FALSE,
-                      hash_flag = TRUE) {
-  base_url <- "https://openapi.koreainvestment.com:9443"
-  url <- sprintf("%s/%s", base_url, api_url)
+                      hash_flag = TRUE, is_paper = FALSE) {
+  base_url <- get_base_url()
+  url <- sprintf("%s/%s", base_url = base_url, api_url = api_url)
+
+  is_paper <- is_paper_trading()
+  if (is_paper) {
+    if (substr(tr_id, 1, 1) %in% c("T", "J", "C")) {
+      tr_id <- sprintf("V%s", substr(tr_id, 2, nchar(tr_id)))
+    }
+  }
 
   headers <- list(
     "Content-Type" = "application/json",

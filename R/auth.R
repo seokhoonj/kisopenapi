@@ -9,8 +9,14 @@
 #'
 #' @export
 set_auth <- function() {
-  access_token <- Sys.getenv("KIS_ACCESS_TOKEN")
-  access_token_expired <- Sys.getenv("KIS_ACCESS_TOKEN_EXPIRED")
+  is_paper <- is_paper_trading()
+  if (!is_paper) {
+    access_token <- Sys.getenv("KIS_ACCESS_TOKEN")
+    access_token_expired <- Sys.getenv("KIS_ACCESS_TOKEN_EXPIRED")
+  } else {
+    access_token <- Sys.getenv("KIS_PAPER_ACCESS_TOKEN")
+    access_token_expired <- Sys.getenv("KIS_PAPER_ACCESS_TOKEN_EXPIRED")
+  }
   if (access_token == "") {
     generate_auth()
   } else {
@@ -27,7 +33,6 @@ set_auth <- function() {
 ##' @rdname set_auth
 ##' @export
 get_auth <- function() set_auth()
-
 
 ##' @rdname set_auth
 ##' @export

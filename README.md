@@ -35,29 +35,45 @@ devtools::install_packages("seokhoonj/kisopenapi")
 # 패키지 로드
 library(kisopenapi)
 
-# set account number and account product code
-# 계좌번호 8자리를와 계좌상품코드를 환경변수에 입력
-set_cano("your account number") # 8 digits
-set_acnt_prdt_cd("01") # your account product code 2 digits
-
-# set kis app key and app secret
-# 생성한 app key와 app secret도 환경변수에 입력 
-set_app_key("your app key")
-set_app_secret("your app secret")
-
-# or you can set .Renviron file permanently
-# 위의 4가지 변수를 환경변수에 영구히 저장
+# open .Renvrion file
+# .Renviron 파일을 열고
 usethis::edit_r_environ()
-# paste KIS_CANO="YOUR ACCOUNT NUMBER"
-# paste KIS_ACNT_PRDT_CD="01"
-# paste KIS_APP_KEY="YOUR APP KEY"
-# paste KIS_APP_SECRET="YOUR APP SECRET"
+
+# paste the following environment variables with your values.
+# 다음 환경변수를 갑과 함께 붙여 넣는다.
+
+# For real trading
+KIS_CANO=""
+KIS_ACNT_PRDT_CD=""
+KIS_APP_KEY=""
+KIS_APP_SECRET=""
+
+# For paper trading
+KIS_PAPER_CANO=""
+KIS_PAPER_ACNT_PRDT_CD=""
+KIS_PAPER_APP_KEY=""
+KIS_PAPER_APP_SECRET=""
+
+# Alternatively,
+# set account number, account product code, kis app key and app secret
+# but this method lasts only for the current session and disappears.
+# 계좌번호 8자리, 계좌상품코드, 생성한 app key와 app secret를 환경변수에 입력
+# 하지만 이 방법은 현재 세션에서만 지속되고 사라진다.
+# set_trading_env(
+#   cano = "your account number", # 8 digits
+#   acnt_prdt_cd = "your account product code", # your account product code 2 digits
+#   app_key = "your app key",
+#   app_secret = "your app secret"
+# ) 
+
 
 # generate an access token using app key and app secret
 # An access token is issued once a day basically, and if tokens are issued frequently, your access might be restricted
+# It's automatically created when the functions are executed
 # app key와 app secret을 활용하여 엑세스 토큰을 생성
 # 접근 토큰은 1일 1회 발급이 원칙이며, 유효기간내 잦은 토큰 발급 발생 시 이용시 제한 가능
-set_auth()
+# 함수가 실행될 때 자동으로 실행
+# set_auth()
 
 # get balance
 # 계좌잔고 확인
@@ -87,6 +103,10 @@ get_orders()
 # cancel
 # 주문 취소
 kis_cancel_all()
+
+# Change the trading environment (real -> paper, paper -> real)
+# 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자
+change_trading_env()
 ```
 
 ## Reference

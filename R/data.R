@@ -14,12 +14,15 @@
 get_current_price <- function(stock_code) {
   api_url <- "uapi/domestic-stock/v1/quotations/inquire-price"
   tr_id <- "FHKST01010100"
+
   params <- list(
     "fid_cond_mrkt_div_code" = "J",
     "fid_input_iscd" = stock_code
   )
+
   res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
   resp <- res |> resp_body_json()
+
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
       return(data.frame(resp$output))
@@ -51,7 +54,6 @@ get_current_price <- function(stock_code) {
 get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
   api_url <- "uapi/domestic-stock/v1/quotations/inquire-daily-price"
   tr_id <- "FHKST01010400"
-
   params <- list(
     "fid_cond_mrkt_div_code" = "J",
     "fid_input_iscd" = stock_code,

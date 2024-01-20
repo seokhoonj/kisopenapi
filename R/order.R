@@ -15,6 +15,7 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
                       order_type = "00", buy_flag = TRUE) {
   api_url <- "uapi/domestic-stock/v1/trading/order-cash"
   tr_id <- if (buy_flag) "TTTC0802U" else "TTTC0801U"
+  # tr_id <- "VTTC0802U"
 
   if (missing(prdt_code))
     prdt_code <- get_acnt_prdt_cd()
@@ -51,7 +52,8 @@ kis_buy <- function(stock_code, order_qty, order_price, prdt_code,
 
 #' @rdname kis_order
 #' @export
-kis_sell <- function(stock_code, order_qty, order_price, order_type = "00") {
+kis_sell <- function(stock_code, order_qty, order_price, prdt_code,
+                     order_type = "00") {
   if (missing(prdt_code))
     prdt_code <- get_acnt_prdt_cd()
   kis_order(
@@ -97,7 +99,6 @@ get_orders <- function() {
 
   res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    hash_flag = TRUE)
-
   resp <- res |> resp_body_json()
 
   if (res$status_code == 200) {

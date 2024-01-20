@@ -12,7 +12,7 @@
 #'
 #' @export
 get_hash <- function(params) {
-  base_url <- "https://openapi.koreainvestment.com:9443"
+  base_url <- get_base_url()
   api_url <- "uapi/hashkey"
   url <- sprintf("%s/%s", base_url, api_url)
   headers <- list(

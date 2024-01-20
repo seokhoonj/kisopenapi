@@ -17,7 +17,7 @@ kis_order(
 
 kis_buy(stock_code, order_qty, order_price, prdt_code, order_type = "00")
 
-kis_sell(stock_code, order_qty, order_price, order_type = "00")
+kis_sell(stock_code, order_qty, order_price, prdt_code, order_type = "00")
 }
 \arguments{
 \item{stock_code}{A string specifying stock code}

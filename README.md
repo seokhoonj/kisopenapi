@@ -128,7 +128,7 @@ kis_revise(
 
 # cancel
 # 주문 취소
-kis_cancel_all() # KIS developers is not ready for the paper trading environment.
+kis_cancel_all()
 
 # Change the trading environment (real -> paper, paper -> real)
 # 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자

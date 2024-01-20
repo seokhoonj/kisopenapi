@@ -1,8 +1,8 @@
 # kisopenapi package
 
-Korea Investment & Securites Open Trading API using R (In-development)
+Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 
-한국투자증권 Open Trading API using R
+한국투자증권 (KIS) Open Trading API using R
 
 <!-- badges: start -->
 

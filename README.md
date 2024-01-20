@@ -105,7 +105,7 @@ get_stock_history("005930", unit = "D")
 get_stock_investor("005930")
 
 # hash key is applied to all orders, revise and cancel functions
-# 모든 주문관련 함수에는 자동으로 해쉬키가 적용
+# 모든 주문관련 함수에는 자동으로 해시키가 적용
 
 # buy
 # 매수
@@ -144,4 +144,4 @@ is_paper_trading()
 
 ## Reference
 
--   KIS github repo: <https://github.com/koreainvestment/open-trading-api/tree/main>
+-   KIS official git repo: <https://github.com/koreainvestment/open-trading-api/tree/main>

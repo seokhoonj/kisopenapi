@@ -169,9 +169,9 @@ print_app_secret <- function() {
 get_base_url <- function() {
   is_paper <- is_paper_trading()
   if (!is_paper) {
-    base_url <- local(.KIS_BASE_URL, envir = KIS_TRADING_ENV)
+    base_url <- local(.KIS_BASE_URL, envir = .KIS_TRADING_ENV)
   } else {
-    base_url <- local(.KIS_PAPER_BASE_URL, envir = KIS_TRADING_ENV)
+    base_url <- local(.KIS_PAPER_BASE_URL, envir = .KIS_TRADING_ENV)
   }
   return(base_url)
 }

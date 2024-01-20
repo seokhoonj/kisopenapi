@@ -36,7 +36,7 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
   ), as.character)
 
   res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
-                   post_flag = TRUE)
+                   post_flag = TRUE, hash_flag = TRUE)
   resp <- res |> resp_body_json()
 
   if (res$status_code == 200) {

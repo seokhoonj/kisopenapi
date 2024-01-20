@@ -24,6 +24,22 @@ generate_auth <- function() {
   return(resp$access_token)
 }
 
+get_hash <- function(params) {
+  base_url <- get_base_url()
+  api_url <- "uapi/hashkey"
+  url <- sprintf("%s/%s", base_url, api_url)
+  headers <- list(
+    "Content-Type" = "application/json",
+    "appKey" = get_app_key(),
+    "appSecret" = get_app_secret()
+  )
+  res <- request(url) |> req_headers(!!!headers) |>
+    req_body_json(params) |> req_perform()
+  resp <- res |> resp_body_json()
+  hash <- resp$HASH
+  return(hash)
+}
+
 url_fetch <- function(api_url, tr_id, params, append_headers, post_flag = FALSE,
                       hash_flag = TRUE, is_paper = FALSE) {
   base_url <- get_base_url()

@@ -80,10 +80,12 @@ readRenviron("~/.Renviron") # .rs.restartR()
 
 # generate an access token using app key and app secret
 # An access token is issued once a day basically, and if tokens are issued frequently, your access might be restricted
-# It's automatically created when the functions are executed
+# It's automatically created when the functions are executed (reissued when 
+# the current session ends or after 86,400 seconds)
 # app key와 app secret을 활용하여 엑세스 토큰을 생성
-# 접근 토큰은 1일 1회 발급이 원칙이며, 유효기간내 잦은 토큰 발급 발생 시 이용시 제한 가능
-# 함수가 실행될 때 자동으로 실행
+# 접근 토큰은 1일 1회 발급이 원칙이며, 유효기간내 잦은 토큰 발급 발생 시 이용이 제한될
+# 수 있음.
+# 함수가 실행될 때 자동으로 실행 (세션이 종료되거나 86,400초가 지나면 재발행)
 # set_auth()
 
 # get balance
@@ -101,6 +103,9 @@ get_stock_history("005930", unit = "D")
 # get stock investors (samsung electronics)
 # 투자자 데이터 추출 (삼성전자)
 get_stock_investor("005930")
+
+# hash key is applied to all orders, revise and cancel functions
+# 모든 주문관련 함수에는 자동으로 해쉬키가 적용
 
 # buy
 # 매수
@@ -134,7 +139,7 @@ change_trading_env()
 is_paper_trading()
 
 # `get_orders` function is not supproted for the paper trading enviroment.
-# `get_orders` 함수는 모의투자에서 아직 지원되지 않는 것으로 보입니다 
+# `get_orders` 함수는 모의투자에서 아직 지원되지 않는 것으로 보입니다.
 ```
 
 ## Reference

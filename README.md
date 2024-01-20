@@ -42,30 +42,34 @@ library(kisopenapi)
 usethis::edit_r_environ()
 
 # paste the following environment variables with your values.
-# 다음 환경변수를 갑과 함께 붙여 넣는다.
+# 다음 환경변수를 작성하여 붙여 넣는다.
 
 
 # For real trading
-KIS_CANO=""
-KIS_ACNT_PRDT_CD=""
-KIS_APP_KEY=""
-KIS_APP_SECRET=""
+KIS_CANO="" # 계좌번호 8자리
+KIS_ACNT_PRDT_CD="" # 계좌 상품코드 2자리, 보통 "01"
+KIS_APP_KEY="" # 생성한 app key 
+KIS_APP_SECRET="" # 생성한 app secret
 
 # For paper trading
-KIS_PAPER_CANO=""
-KIS_PAPER_ACNT_PRDT_CD=""
-KIS_PAPER_APP_KEY=""
-KIS_PAPER_APP_SECRET=""
+KIS_PAPER_CANO="" # 모의계좌번호 8자리
+KIS_PAPER_ACNT_PRDT_CD="" # 모의계좌 상품코드 2자리, 보통 "01"
+KIS_PAPER_APP_KEY="" # 생성한 모의 app key
+KIS_PAPER_APP_SECRET="" # 생성한 모의 app secret
 
 
-# read in .Renviron file you just created (or restart the R session)
-# .Renviron 파일을 읽어 온다. (혹은 R을 재시작한다.)
+# read .Renviron file you just created (or restart the R session)
+# Now, these environment variables are stored permanently.
+# 상기 작업이 끝나면 .Renviron 파일을 불러 온다. (혹은 R을 재시작한다.)
+# 이제 이 환경변수들은 영구히 저장된다.
 readRenviron("~/.Renviron") # .rs.restartR()
 
 # Alternatively,
-# set account number, account product code, kis app key and app secret
+# set account number, account product code, kis app key and app secret using
+# `set_trading_env' function.
 # but this method lasts only for the current session and disappears.
-# 계좌번호 8자리, 계좌상품코드, 생성한 app key와 app secret를 환경변수에 입력
+# 계좌번호 8자리, 계좌상품코드, 생성한 app key와 app secret를 `set_trading_env` 
+# 함수를 활용하여 환경변수에 입력한다.
 # 하지만 이 방법은 현재 세션에서만 지속되고 사라진다.
 # set_trading_env(
 #   cano = "your account number", # 8 digits
@@ -73,7 +77,6 @@ readRenviron("~/.Renviron") # .rs.restartR()
 #   app_key = "your app key",
 #   app_secret = "your app secret"
 # ) 
-
 
 # generate an access token using app key and app secret
 # An access token is issued once a day basically, and if tokens are issued frequently, your access might be restricted

@@ -100,13 +100,19 @@ kis_cancel <- function(order_no, order_branch, order_qty, order_price,
 #' @export
 kis_cancel_all <- function() {
   orders <- get_orders()
-  order_list <- as.numeric(orders$odno)
-  qty_list <- orders$ord_qty
-  price_list <- orders$ord_unpr
-  branch_list <- orders$ord_gno_brno
-  n <- nrow(orders)
-  for (i in seq_len(n)) {
-    kis_cancel(order_list[i], qty_list[i], price_list[i], branch_list[i])
-    Sys.sleep(.2)
+  if (!is.null(orders)) {
+    n <- nrow(orders)
+    if (n > 0) {
+      order_list <- as.numeric(orders$odno)
+      qty_list <- orders$ord_qty
+      price_list <- orders$ord_unpr
+      branch_list <- orders$ord_gno_brno
+      for (i in seq_len(n)) {
+        kis_cancel(order_list[i], qty_list[i], price_list[i], branch_list[i])
+        Sys.sleep(.2)
+      }
+    } else {
+      cat("No orders")
+    }
   }
 }

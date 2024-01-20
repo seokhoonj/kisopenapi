@@ -56,7 +56,7 @@ set_trading_env <- function(cano, acnt_prdt_cd, app_key, app_secret,
 }
 
 is_paper_trading <- function() {
-  return(local(.IS_PAPER, envir = KIS_TRADING_ENV))
+  return(local(.IS_PAPER, envir = .KIS_TRADING_ENV))
 }
 
 #' @title change trading environment
@@ -69,7 +69,7 @@ is_paper_trading <- function() {
 #'
 #' @export
 change_trading_env <- function() {
-  assign(".IS_PAPER", !KIS_TRADING_ENV$.IS_PAPER, envir = KIS_TRADING_ENV)
+  assign(".IS_PAPER", !.KIS_TRADING_ENV$.IS_PAPER, envir = .KIS_TRADING_ENV)
   is_paper <- is_paper_trading()
   if (!is_paper)
     cat("real\n")

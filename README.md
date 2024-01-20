@@ -62,7 +62,7 @@ KIS_PAPER_APP_SECRET="" # 생성한 모의 app secret
 # Now, these environment variables are stored permanently.
 # 상기 작업이 끝나면 .Renviron 파일을 불러 온다. (혹은 R을 재시작한다.)
 # 이제 이 환경변수들은 영구히 저장된다.
-readRenviron("~/.Renviron") # .rs.restartR()
+readRenviron("~/.Renviron") # alternatively, .rs.restartR()
 
 # Alternatively,
 # set account number, account product code, kis app key and app secret using

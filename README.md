@@ -112,7 +112,7 @@ kis_sell(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
 
 # get orders
 # 주문 내역
-get_orders()
+get_orders() 
 
 # revise (get the order number and branch information via `get_orders()`)
 # 주문 정정 (`get_orders()` 함수를 통해 정보 취득)
@@ -123,7 +123,7 @@ kis_revise(
 
 # cancel
 # 주문 취소
-kis_cancel_all() # not work in paper trading environment?
+kis_cancel_all() # KIS developers is not ready for the paper trading environment.
 
 # Change the trading environment (real -> paper, paper -> real)
 # 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자
@@ -132,6 +132,9 @@ change_trading_env()
 # Check the current trading environment (real or paper)
 # 현재 거래 환경 확인 (실전 or 모의)
 is_paper_trading()
+
+# `get_orders` function is not supproted for the paper trading enviroment.
+# `get_orders` 함수는 모의투자에서 아직 지원되지 않는 것으로 보입니다 
 ```
 
 ## Reference

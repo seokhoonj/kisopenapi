@@ -15,7 +15,6 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
                       order_type = "00", buy_flag = TRUE) {
   api_url <- "uapi/domestic-stock/v1/trading/order-cash"
   tr_id <- if (buy_flag) "TTTC0802U" else "TTTC0801U"
-  # tr_id <- "VTTC0802U"
 
   if (missing(prdt_code))
     prdt_code <- get_acnt_prdt_cd()
@@ -35,7 +34,24 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
   res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    post_flag = TRUE, hash_flag = TRUE)
   resp <- res |> resp_body_json()
-  return(resp)
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
+    } else if (resp$msg1 == "EGW00123") {
+      set_auth()
+      kis_order(
+        stock_code = stock_code, order_qty = order_qty,
+        order_price = order_price, prdt_code = prdt_code,
+        order_type = order_type, buy_flag = buy_flag
+      )
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
 }
 
 #' @rdname kis_order

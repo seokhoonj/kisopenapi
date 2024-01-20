@@ -125,6 +125,10 @@ kis_cancel_all() # not work in paper trading environment?
 # Change the trading environment (real -> paper, paper -> real)
 # 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자
 change_trading_env()
+
+# Check the current trading environment (real or paper)
+# 현재 거래 환경 확인 (실전 or 모의)
+is_paper_trading()
 ```
 
 ## Reference

@@ -60,7 +60,7 @@ KIS_PAPER_APP_SECRET=""
 
 # read in .Renviron file you just created (or restart the R session)
 # .Renviron 파일을 읽어 온다. (혹은 R을 재시작한다.)
-readRenviron("~/.Renviron")
+readRenviron("~/.Renviron") # .rs.restartR()
 
 # Alternatively,
 # set account number, account product code, kis app key and app secret

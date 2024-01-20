@@ -10,7 +10,6 @@ Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 
 한국투자증권 (KIS) Open Trading API using R
 
-
 ## Introduction
 
 -   This package is created for R users, referring to the Korea Investment & Securities Open Trading API.
@@ -19,7 +18,7 @@ Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 
 -   For more information, please refer to the following official website <https://github.com/koreainvestment/open-trading-api/tree/main>.
 
--   해당 패키지는 한국투자증권 Open Trading API를 참조하여, R 사용자가 활용할 수 있게 일부 재구성한 것입니다.
+-   해당 패키지는 한국투자증권 Open Trading API를 참조하여, R 사용자가 쉽게 활용할 수 있게 일부 재구성한 것입니다.
 
 -   먼저 계좌를 개설한 후 <https://apiportal.koreainvestment.com/>에서 app key와 app secret을 생성합니다.
 
@@ -31,7 +30,7 @@ Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 devtools::install_packages("seokhoonj/kisopenapi")
 ```
 
-## Example
+## Environment variables setting
 
 ``` r
 # load library
@@ -45,7 +44,6 @@ usethis::edit_r_environ()
 # paste the following environment variables with your values.
 # 다음 환경변수를 작성하여 붙여 넣는다.
 
-
 # For real trading
 KIS_CANO="" # 계좌번호 8자리
 KIS_ACNT_PRDT_CD="" # 계좌 상품코드 2자리, 보통 "01"
@@ -58,10 +56,9 @@ KIS_PAPER_ACNT_PRDT_CD="" # 모의계좌 상품코드 2자리, 보통 "01"
 KIS_PAPER_APP_KEY="" # 생성한 모의 app key
 KIS_PAPER_APP_SECRET="" # 생성한 모의 app secret
 
-
 # read .Renviron file you just created (or restart the R session)
 # Now, these environment variables are stored permanently.
-# 상기 작업이 끝나면 .Renviron 파일을 불러 온다. (혹은 R을 재시작한다.)
+# 상기 작업이 끝나면 .Renviron 파일의 변수를 불러 온다. (혹은 R을 재시작한다.)
 # 이제 이 환경변수들은 영구히 저장된다.
 readRenviron("~/.Renviron") # alternatively, .rs.restartR()
 
@@ -88,7 +85,11 @@ readRenviron("~/.Renviron") # alternatively, .rs.restartR()
 # 수 있음.
 # 함수가 실행될 때 자동으로 실행 (세션이 종료되거나 86,400초가 지나면 재발행)
 # set_auth()
+```
 
+## Examples
+
+``` r
 # get balance
 # 계좌잔고 확인
 get_balance()

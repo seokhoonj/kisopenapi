@@ -42,6 +42,7 @@ usethis::edit_r_environ()
 # paste the following environment variables with your values.
 # 다음 환경변수를 갑과 함께 붙여 넣는다.
 
+
 # For real trading
 KIS_CANO=""
 KIS_ACNT_PRDT_CD=""
@@ -53,6 +54,11 @@ KIS_PAPER_CANO=""
 KIS_PAPER_ACNT_PRDT_CD=""
 KIS_PAPER_APP_KEY=""
 KIS_PAPER_APP_SECRET=""
+
+
+# read in .Renviron file you just created (or restart the R session)
+# .Renviron 파일을 읽어 온다. (혹은 R을 재시작한다.)
+readRenviron("~/.Renviron")
 
 # Alternatively,
 # set account number, account product code, kis app key and app secret
@@ -103,9 +109,12 @@ kis_sell(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
 # 주문 내역
 get_orders()
 
-# revise
-# 주문 정정
-kis_revise(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
+# revise (get the order number and branch information via `get_orders()`)
+# 주문 정정 (`get_orders()` 함수를 통해 정보 취득)
+kis_revise(
+  order_no = "your order number", order_branch = "your order branch"
+  order_qty = 1, order_price = "price_you_want"
+)
 
 # cancel
 # 주문 취소

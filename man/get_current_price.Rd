@@ -13,7 +13,7 @@ get_current_price(stock_code)
 current stock price
 }
 \description{
-Get current stock price using KIS API.
+Get current stock price.
 }
 \examples{
 ## get current price

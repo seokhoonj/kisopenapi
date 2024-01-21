@@ -81,7 +81,7 @@ kis_sell <- function(stock_code, order_qty, order_price, prdt_code,
 #' @title get orders
 #'
 #' @description
-#' Return a list of orders that can be modified or canceled.
+#' Return a list of orders that can be revised or canceled.
 #'
 #' @return data.frame of orders
 #'
@@ -123,6 +123,126 @@ get_orders <- function() {
     } else if (resp$msg_cd == "EGW00123") {
       set_auth()
       get_orders()
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
+}
+
+#' @title get buyable cash
+#'
+#' @description
+#' Get buyable amount of cash of the account
+#'
+#' @param stock_code A string specifying stock code
+#' @param qry_price A numeric or string specifying price
+#' @param prdt_code A string specifying account product code
+#'
+#' @return A numeric specifying buyable cash
+#'
+#' @examples
+#' # get buyable cash
+#' \dontrun{get_buyable_cash("005930")}
+#'
+#' @export
+get_buyable_cash <- function(stock_code, qry_price = 0, prdt_code) {
+  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
+  tr_id <- "TTTC8908R"
+
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
+
+  params <- lapply(list(
+    "CANO" = get_cano(),
+    "ACNT_PRDT_CD" = prdt_code,
+    "PDNO" = stock_code,
+    "ORD_UNPR" = qry_price,
+    "ORD_DVSN" = "02",
+    "CMA_EVLU_AMT_ICLD_YN" = "Y",
+    "OVRS_ICLD_YN" = "N"
+  ), as.character)
+
+  res <- url_fetch(api_url, tr_id, params)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      return(as.numeric(resp$output$ord_psbl_cash))
+    } else if (resp$msg_cd == "EGW00123") {
+      set_auth()
+      get_buyable_cash()
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
+}
+
+#' @title get order history
+#'
+#' @description
+#' Get order history from start date to end date.
+#'
+#' @param sdt A string specifying start date "YYYYMMDD"
+#' @param edt A string specifying end date "YYYYMMDD"
+#' @param prdt_code A string specifying account product code
+#' @param zip_flag A boolean specifying choosing important columns
+#'
+#' @return Order history data frame
+#'
+#' @examples
+#' # get order history
+#' \dontrun{get_order_history("20")}
+#'
+#' @export
+get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
+  # get_my_complete function at kis official git repo
+  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
+  tr_id <- "TTTC8001R"
+
+  if (missing(edt))
+    edt <- format(Sys.Date(), "%Y%m%d")
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
+
+  params <- lapply(list(
+    "CANO" = get_cano(),
+    "ACNT_PRDT_CD" = prdt_code,
+    "INQR_STRT_DT" = sdt,
+    "INQR_END_DT" = edt,
+    "SLL_BUY_DVSN_CD" = "00",
+    "INQR_DVSN" = "00",
+    "PDNO" = "",
+    "CCLD_DVSN" = "00",
+    "ORD_GNO_BRNO" = "",
+    "ODNO" = "",
+    "INQR_DVSN_3" = "00",
+    "INQR_DVSN_1" = "",
+    "INQR_DVSN_2" = "",
+    "CTX_AREA_FK100" = "",
+    "CTX_AREA_NK100" = ""
+  ), as.character)
+
+  res <- url_fetch(api_url, tr_id, params)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      output <- data.frame(data.table::rbindlist(resp$output1))
+      if (zip_flag) {
+        return(output[, c(
+          "ord_dt", "orgn_odno", "sll_buy_dvsn_cd_name", "pdno", "ord_qty",
+          "ord_unpr", "avg_prvs", "cncl_yn", "tot_ccld_amt", "rmn_qty"
+        )])
+      } else {
+        return(output)
+      }
+    } else if (resp$msg_cd == "EGW00123") {
+      set_auth()
+      get_order_history()
     } else {
       cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
     }

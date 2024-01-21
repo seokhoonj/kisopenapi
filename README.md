@@ -98,6 +98,10 @@ get_balance()
 # 가격 데이터 추출 (삼성전자)
 get_current_price("005930")
 
+# get stock quotes (samsung electronic)
+# 시세 데이터 추출 (삼성전자) (현재 30개 제한)
+get_stock_qutoes("005930")
+
 # get history data (samsung electronics)
 # 가격 history 데이터 추출 (삼성전자) (현재 30개 제한)
 get_stock_history("005930", unit = "D") # unit: D(day), W(week), M(month)
@@ -105,6 +109,11 @@ get_stock_history("005930", unit = "D") # unit: D(day), W(week), M(month)
 # get stock investors (samsung electronics)
 # 투자자 데이터 추출 (삼성전자)
 get_stock_investor("005930")
+
+# get buyable cash
+# 매수 가능 현금 확인
+get_buyable_cash("005930")
+
 
 # hash key is applied to all orders, revise and cancel functions
 # 모든 주문관련 함수에는 자동으로 해시키가 적용
@@ -119,7 +128,11 @@ kis_sell(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
 
 # get orders
 # 주문 내역
-get_orders() 
+get_orders()
+
+# get order history
+# 주문 내역 history
+get_order_history(sdt = "20240102")
 
 # revise (get the order number and branch information via `get_orders()`)
 # 주문 정정 (`get_orders()` 함수를 통해 정보 취득)

@@ -10,7 +10,7 @@ get_orders()
 data.frame of orders
 }
 \description{
-Return a list of orders that can be modified or canceled.
+Return a list of orders that can be revised or canceled.
 }
 \examples{
 # get a list of orders

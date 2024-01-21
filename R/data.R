@@ -1,7 +1,7 @@
 #' @title get current price
 #'
 #' @description
-#' Get current stock price using KIS API.
+#' Get current stock price.
 #'
 #' @param stock_code A string specifying stock number (stock code)
 #' @return current stock price
@@ -37,10 +37,50 @@ get_current_price <- function(stock_code) {
   }
 }
 
+#' @title get stock quotes
+#'
+#' @description
+#' Get current stock qutoes.
+#'
+#' @param stock_code A string specifying stock code
+#' @return current stock quotes data frame
+#'
+#' @examples
+#' ## get stock quotes
+#' \dontrun{get_stock_quotes("005930")}
+#'
+#' @export
+get_stock_quotes <- function(stock_code) {
+  # get_stock_completed function at kis official git repo
+  api_url <- "uapi/domestic-stock/v1/quotations/inquire-ccnl"
+  tr_id <- "FHKST01010300"
+
+  params <- lapply(list(
+    "FID_COND_MRKT_DIV_CODE" = "J",
+    "FID_INPUT_ISCD" = stock_code
+  ), as.character)
+
+  res <- url_fetch(api_url, tr_id, params)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      return(data.frame(data.table::rbindlist(resp$output)))
+    } else if (resp$msg_cd == "EGW00123") {
+      set_auth()
+      get_stock_quotes(stock_code)
+    } else {
+      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+    }
+  } else {
+    cat(sprintf("Error Code : %s\n", res$status_code))
+  }
+}
+
 #' @title get stock history
 #'
 #' @description
-#' Get stock history using KIS API.
+#' Get stock history.
 #'
 #' @param stock_code A string specifying stock code
 #' @param unit A string specifying day, week, month

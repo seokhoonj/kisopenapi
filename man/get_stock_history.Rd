@@ -15,7 +15,7 @@ get_stock_history(stock_code, unit = c("D", "W", "M"))
 stock history data frame
 }
 \description{
-Get stock history using KIS API.
+Get stock history.
 }
 \examples{
 ## get stock history

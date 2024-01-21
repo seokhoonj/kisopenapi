@@ -66,7 +66,7 @@ get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
 
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
-      return(as.data.frame(data.table::rbindlist(resp$output)))
+      return(data.frame(data.table::rbindlist(resp$output)))
     } else if (resp$msg_cd == "EGW00123") {
       set_auth()
       get_stock_history(stock_code)

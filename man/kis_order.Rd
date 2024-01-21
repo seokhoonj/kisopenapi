@@ -36,5 +36,5 @@ kis_sell(stock_code, order_qty, order_price, prdt_code, order_type = "00")
 An order result
 }
 \description{
-Order stock using KIS API
+Order stocks.
 }

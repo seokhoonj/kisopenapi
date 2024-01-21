@@ -1,7 +1,7 @@
 #' @title KIS order
 #'
 #' @description
-#' Order stock using KIS API
+#' Order stocks.
 #'
 #' @param stock_code A string specifying stock code
 #' @param order_qty A numeric or string specifying order quantity

@@ -24,7 +24,7 @@ No return value, called to set environment variables
 Save environment variables for the current session. To set it permanently,
 please add the following line to your .Renvrion file:
 }
-\section{For real trading}{
+\section{For live trading}{
 KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account)
 KIS_ACNT_PRDT_CD="01" (last 2 digits of your account)
 KIS_APP_KEY="YOUR APP KEY"

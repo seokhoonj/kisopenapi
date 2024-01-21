@@ -44,7 +44,7 @@ usethis::edit_r_environ()
 # paste the following environment variables with your values.
 # 다음 환경변수를 작성하여 붙여 넣는다.
 
-# For real trading
+# For live trading
 KIS_CANO="" # 계좌번호 8자리
 KIS_ACNT_PRDT_CD="" # 계좌 상품코드 2자리, 보통 "01"
 KIS_APP_KEY="" # 생성한 app key 
@@ -145,13 +145,13 @@ kis_revise(
 # 주문 취소
 kis_cancel_all()
 
-# Change the trading environment (real -> paper, paper -> real)
+# Change the trading environment (live -> paper, paper -> live)
 # 거래 계좌 변경 (실전투자 -> 모의투자, 모의투자 -> 실전투자) # default 실전투자
 change_trading_env()
 
-# Check the current trading environment (real or paper)
+# Check the current trading environment (live or paper)
 # 현재 거래 환경 확인 (실전 or 모의)
-is_paper_trading()
+print_trading_env()
 
 # `get_orders` function is not supproted for the paper trading enviroment.
 # `get_orders` 함수는 모의투자에서 아직 지원되지 않는 것으로 보입니다.

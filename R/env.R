@@ -4,7 +4,7 @@
 #' Save environment variables for the current session. To set it permanently,
 #' please add the following line to your .Renvrion file:
 #'
-#' # For real trading
+#' # For live trading
 #' KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account)
 #' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account)
 #' KIS_APP_KEY="YOUR APP KEY"
@@ -55,6 +55,10 @@ set_trading_env <- function(cano, acnt_prdt_cd, app_key, app_secret,
   }
 }
 
+change_is_paper <- function() {
+  assign(".IS_PAPER", !.KIS_TRADING_ENV$.IS_PAPER, envir = .KIS_TRADING_ENV)
+}
+
 is_paper_trading <- function() {
   return(local(.IS_PAPER, envir = .KIS_TRADING_ENV))
 }
@@ -62,19 +66,35 @@ is_paper_trading <- function() {
 #' @title change trading environment
 #'
 #' @description
-#' if you wrote real trading and paper trading evironment variables both in
+#' if you wrote live trading and paper trading evironment variables both in
 #' your .Renviron file, you can change trading environment.
 #'
-#' @return "real" or "paper" string value
+#' @return "live" or "paper" string value
 #'
 #' @export
 change_trading_env <- function() {
-  assign(".IS_PAPER", !.KIS_TRADING_ENV$.IS_PAPER, envir = .KIS_TRADING_ENV)
+  change_is_paper()
   is_paper <- is_paper_trading()
   if (!is_paper)
-    cat("real\n")
+    return("live")
   else
-    cat("paper\n")
+    return("paper")
+}
+
+#' @title print trading environment
+#'
+#' @description
+#' Print the current trading environment.
+#'
+#' @return "live" or "paper" string value
+#'
+#' @export
+print_trading_env <- function() {
+  is_paper <- is_paper_trading()
+  if (!is_paper)
+    return("live")
+  else
+    return("paper")
 }
 
 #' @title print base url

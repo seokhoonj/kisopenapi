@@ -7,9 +7,9 @@
 change_trading_env()
 }
 \value{
-"real" or "paper" string value
+"live" or "paper" string value
 }
 \description{
-if you wrote real trading and paper trading evironment variables both in
+if you wrote live trading and paper trading evironment variables both in
 your .Renviron file, you can change trading environment.
 }

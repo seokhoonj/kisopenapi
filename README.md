@@ -6,7 +6,7 @@
 
 <!-- badges: end -->
 
-Korea Investment & Securites (KIS) Open Trading API using R (In-development)
+Korea Investment & Securites (KIS) Open Trading API using R
 
 한국투자증권 (KIS) Open Trading API using R
 
@@ -18,7 +18,7 @@ Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 
 -   For more information, please refer to the following official website <https://github.com/koreainvestment/open-trading-api/tree/main>.
 
--   해당 패키지는 한국투자증권 Open Trading API를 참조하여, R 사용자가 쉽게 활용할 수 있게 일부 재구성한 것입니다.
+-   해당 패키지는 한국투자증권 Open Trading API (REST) 부분을 참조하여, R 사용자가 쉽게 활용할 수 있게 재구성한 것입니다.
 
 -   먼저 계좌를 개설한 후 <https://apiportal.koreainvestment.com/>에서 app key와 app secret을 생성합니다.
 
@@ -30,7 +30,7 @@ Korea Investment & Securites (KIS) Open Trading API using R (In-development)
 devtools::install_packages("seokhoonj/kisopenapi")
 ```
 
-## Environment variables setting
+## Setting environment variables
 
 ``` r
 # load library
@@ -100,7 +100,7 @@ get_current_price("005930")
 
 # get history data (samsung electronics)
 # 가격 history 데이터 추출 (삼성전자) (현재 30개 제한)
-get_stock_history("005930", unit = "D")
+get_stock_history("005930", unit = "D") # unit: D(day), W(week), M(month)
 
 # get stock investors (samsung electronics)
 # 투자자 데이터 추출 (삼성전자)

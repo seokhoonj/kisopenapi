@@ -4,13 +4,9 @@
 \alias{get_buyable_cash}
 \title{get buyable cash}
 \usage{
-get_buyable_cash(stock_code, qry_price = 0, prdt_code)
+get_buyable_cash(prdt_code)
 }
 \arguments{
-\item{stock_code}{A string specifying stock code}
-
-\item{qry_price}{A numeric or string specifying price}
-
 \item{prdt_code}{A string specifying account product code}
 }
 \value{
@@ -21,6 +17,6 @@ Get buyable amount of cash of the account
 }
 \examples{
 # get buyable cash
-\dontrun{get_buyable_cash("005930")}
+\dontrun{get_buyable_cash()}
 
 }

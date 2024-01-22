@@ -13,3 +13,7 @@ account product code
 Print your account product code in the current trading environemnt.
 it changes depending on the trading environment.
 }
+\examples{
+\dontrun{print_acnt_prdt_cd()}
+
+}

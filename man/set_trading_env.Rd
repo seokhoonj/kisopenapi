@@ -28,15 +28,14 @@ please add the following line to your .Renvrion file: \cr
 KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account) \cr
 KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
 KIS_APP_KEY="YOUR APP KEY" \cr
-KIS_APP_SECRET="YOUR APP SECRET" \cr
-\cr
+KIS_APP_SECRET="YOUR APP SECRET"
 }
 
-\section{For paper trading \cr}{
+\section{For paper trading}{
 KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
 KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr
 KIS_PAPER_APP_KEY="YOUR PAPER APP KEY" \cr
-KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET" \cr
+KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"
 }
 
 \examples{
@@ -49,12 +48,10 @@ set_trading_env(
   app_key = "your app key",
   app_secret = "your app secret"
 )
-
 ## Check environment variables
 print_cano()
 print_acnt_prdt_cd()
 print_app_key()
-print_app_secret()
-}
+print_app_secret()}
 
 }

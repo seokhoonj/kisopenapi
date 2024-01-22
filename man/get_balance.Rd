@@ -15,7 +15,7 @@ get_balance(prdt_code, rt_cash_flag = FALSE)
 balance data.frame
 }
 \description{
-Get your account balance
+Get your account balance.
 }
 \examples{
 ## get account balance
@@ -23,7 +23,6 @@ Get your account balance
 # detail
 get_balance(rt_cash_flag = FALSE)
 # total deposit
-get_balance(rt_cash_flag = TRUE)
-}
+get_balance(rt_cash_flag = TRUE)}
 
 }

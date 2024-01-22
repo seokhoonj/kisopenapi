@@ -13,3 +13,7 @@ base url of current trading environment
 Print your base url in the current trading environemnt.
 it changes depending on the trading environment.
 }
+\examples{
+\dontrun{print_base_url()}
+
+}

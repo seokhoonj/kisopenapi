@@ -13,3 +13,7 @@ account number
 Print your account number in the current trading environemnt.
 it changes depending on the trading environment.
 }
+\examples{
+\dontrun{print_cano()}
+
+}

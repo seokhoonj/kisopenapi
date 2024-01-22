@@ -12,3 +12,7 @@ print_trading_env()
 \description{
 Print the current trading environment.
 }
+\examples{
+\dontrun{print_trading_env()}
+
+}

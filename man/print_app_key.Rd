@@ -13,3 +13,7 @@ app key
 Print your app key in the current trading environemnt.
 it changes depending on the trading environment.
 }
+\examples{
+\dontrun{print_app_key()}
+
+}

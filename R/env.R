@@ -9,7 +9,7 @@
 #' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
 #' KIS_APP_KEY="YOUR APP KEY" \cr
 #' KIS_APP_SECRET="YOUR APP SECRET"
-#' # For paper trading \cr
+#' # For paper trading
 #' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
 #' KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr
 #' KIS_PAPER_APP_KEY="YOUR PAPER APP KEY" \cr
@@ -36,8 +36,7 @@
 #' print_cano()
 #' print_acnt_prdt_cd()
 #' print_app_key()
-#' print_app_secret()
-#' }
+#' print_app_secret()}
 #'
 #' @export
 set_trading_env <- function(cano, acnt_prdt_cd, app_key, app_secret,

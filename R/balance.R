@@ -14,8 +14,7 @@
 #' # detail
 #' get_balance(rt_cash_flag = FALSE)
 #' # total deposit
-#' get_balance(rt_cash_flag = TRUE)
-#' }
+#' get_balance(rt_cash_flag = TRUE)}
 #'
 #' @export
 get_balance <- function(prdt_code, rt_cash_flag = FALSE) {

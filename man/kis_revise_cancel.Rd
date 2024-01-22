@@ -80,7 +80,6 @@ kis_cancel(
   order_price = "your order price"
 )
 ## cancel all
-kis_cancel_all()
-}
+kis_cancel_all()}
 
 }

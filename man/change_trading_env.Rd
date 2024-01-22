@@ -13,3 +13,7 @@ change_trading_env()
 if you wrote live trading and paper trading evironment variables both in
 your .Renviron file, you can change trading environment.
 }
+\examples{
+\dontrun{change_trading_environment()}
+
+}

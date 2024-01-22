@@ -13,3 +13,7 @@ app secret
 Print your app secret in the current trading environemnt.
 it changes depending on the trading environment.
 }
+\examples{
+\dontrun{print_app_secret()}
+
+}

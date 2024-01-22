@@ -11,17 +11,20 @@
 #' @param order_type A string specifying order type
 #'
 #' @examples
-#' ## buy & sell
-#' \dontrun{kis_buy(
+#' \dontrun{
+#' ## buy
+#' kis_buy(
 #'   stock_code = "stock code",
 #'   order_qty = "your order quantity",
 #'   order_price = "your order price"
-#')}
-#' \dontrun{kis_sell(
+#' )
+#' ## sell
+#'kis_sell(
 #'   stock_code = "stock code",
 #'   order_qty = "your order quantity",
 #'   order_price = "your order price"
-#')}
+#' )
+#' }
 #'
 #' @return An order result
 kis_order <- function(stock_code, order_qty, order_price, prdt_code,

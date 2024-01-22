@@ -136,18 +136,16 @@ get_orders <- function() {
 #' @description
 #' Get buyable amount of cash of the account
 #'
-#' @param stock_code A string specifying stock code
-#' @param qry_price A numeric or string specifying price
 #' @param prdt_code A string specifying account product code
 #'
 #' @return A numeric specifying buyable cash
 #'
 #' @examples
 #' # get buyable cash
-#' \dontrun{get_buyable_cash("005930")}
+#' \dontrun{get_buyable_cash()}
 #'
 #' @export
-get_buyable_cash <- function(stock_code, qry_price = 0, prdt_code) {
+get_buyable_cash <- function(prdt_code) {
   api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
   tr_id <- "TTTC8908R"
 
@@ -157,8 +155,8 @@ get_buyable_cash <- function(stock_code, qry_price = 0, prdt_code) {
   params <- lapply(list(
     "CANO" = get_cano(),
     "ACNT_PRDT_CD" = prdt_code,
-    "PDNO" = stock_code,
-    "ORD_UNPR" = qry_price,
+    "PDNO" = "",
+    "ORD_UNPR" = "0",
     "ORD_DVSN" = "02",
     "CMA_EVLU_AMT_ICLD_YN" = "Y",
     "OVRS_ICLD_YN" = "N"

@@ -112,7 +112,7 @@ get_stock_investor("005930")
 
 # get buyable cash
 # 매수 가능 현금 확인
-get_buyable_cash("005930")
+get_buyable_cash()
 
 
 # hash key is applied to all orders, revise and cancel functions

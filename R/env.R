@@ -92,7 +92,7 @@ change_trading_env <- function() {
 print_trading_env <- function() {
   is_paper <- is_paper_trading()
   if (!is_paper)
-    return("live")
+    return("livr")
   else
     return("paper")
 }

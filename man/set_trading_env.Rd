@@ -21,37 +21,40 @@ set_trading_env(cano, acnt_prdt_cd, app_key, app_secret, is_paper = FALSE)
 No return value, called to set environment variables
 }
 \description{
-Save environment variables for the current session. To set it permanently,
-please add the following line to your .Renvrion file:
+Save environment variables for the current session. To set it permanently, \cr
+please add the following line to your .Renvrion file: \cr
 }
 \section{For live trading}{
-KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account)
-KIS_ACNT_PRDT_CD="01" (last 2 digits of your account)
-KIS_APP_KEY="YOUR APP KEY"
-KIS_APP_SECRET="YOUR APP SECRET"
+KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account) \cr
+KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
+KIS_APP_KEY="YOUR APP KEY" \cr
+KIS_APP_SECRET="YOUR APP SECRET" \cr
+\cr
 }
 
-\section{For paper trading}{
-KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account)
-KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account)
-KIS_PAPER_APP_KEY="YOUR PAPER APP KEY"
-KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"
+\section{For paper trading \cr}{
+KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
+KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr
+KIS_PAPER_APP_KEY="YOUR PAPER APP KEY" \cr
+KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET" \cr
 }
 
 \examples{
 ## Set app key for the current session
 \dontrun{
+## Set trading environment only for the current session
 set_trading_env(
   cano = "your account number",
   acnt_prdt_no = "your account product code",
   app_key = "your app key",
   app_secret = "your app secret"
-)}
+)
 
-## Check app key
+## Check environment variables
 print_cano()
 print_acnt_prdt_cd()
 print_app_key()
 print_app_secret()
+}
 
 }

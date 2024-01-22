@@ -66,19 +66,21 @@ response
 Revise and cancel orders.
 }
 \examples{
-## revise & cancel
-\dontrun{kis_revise(
+\dontrun{
+## revise
+kis_revise(
   order_no = "your order number",
   order_branch = "your order branch", order_qty = "your order quantity",
   order_price = "your order price"
-)}
-\dontrun{kis_cancel(
+)
+## cancel
+kis_cancel(
   order_no = "your order number",
   order_branch = "your order branch", order_qty = "your order quantity",
   order_price = "your order price"
-)}
-
+)
 ## cancel all
-\dontrun{kis_cancel_all()}
+kis_cancel_all()
+}
 
 }

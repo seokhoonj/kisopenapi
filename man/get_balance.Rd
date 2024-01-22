@@ -20,8 +20,10 @@ Get your account balance
 \examples{
 ## get account balance
 \dontrun{
-  get_balance(rt_cash_flag = TRUE)
-  get_balance(rt_cash_flag = FALSE)
+# detail
+get_balance(rt_cash_flag = FALSE)
+# total deposit
+get_balance(rt_cash_flag = TRUE)
 }
 
 }

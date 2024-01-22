@@ -8,12 +8,12 @@
 #' KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account) \cr
 #' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
 #' KIS_APP_KEY="YOUR APP KEY" \cr
-#' KIS_APP_SECRET="YOUR APP SECRET" \cr
+#' KIS_APP_SECRET="YOUR APP SECRET"
 #' # For paper trading \cr
 #' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
 #' KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr
 #' KIS_PAPER_APP_KEY="YOUR PAPER APP KEY" \cr
-#' KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET" \cr
+#' KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"
 #'
 #' @param cano A string specifying KIS common account number
 #' @param acnt_prdt_cd A string specifying KIS account product code

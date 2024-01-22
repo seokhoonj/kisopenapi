@@ -1,7 +1,7 @@
 #' @title get account balance
 #'
 #' @description
-#' Get your account balance
+#' Get your account balance.
 #'
 #' @param prdt_code A string specifying account product code
 #' @param rt_cash_flag A boolean specifying total deposit or not

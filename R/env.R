@@ -9,7 +9,6 @@
 #' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
 #' KIS_APP_KEY="YOUR APP KEY" \cr
 #' KIS_APP_SECRET="YOUR APP SECRET" \cr
-#'
 #' # For paper trading \cr
 #' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
 #' KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr
@@ -33,7 +32,6 @@
 #'   app_key = "your app key",
 #'   app_secret = "your app secret"
 #' )
-#'
 #' ## Check environment variables
 #' print_cano()
 #' print_acnt_prdt_cd()
@@ -73,6 +71,9 @@ is_paper_trading <- function() {
 #'
 #' @return "live" or "paper" string value
 #'
+#' @examples
+#' \dontrun{change_trading_environment()}
+#'
 #' @export
 change_trading_env <- function() {
   change_is_paper()
@@ -89,6 +90,9 @@ change_trading_env <- function() {
 #' Print the current trading environment.
 #'
 #' @return "live" or "paper" string value
+#'
+#' @examples
+#' \dontrun{print_trading_env()}
 #'
 #' @export
 print_trading_env <- function() {
@@ -107,6 +111,9 @@ print_trading_env <- function() {
 #'
 #' @return base url of current trading environment
 #'
+#' @examples
+#' \dontrun{print_base_url()}
+#'
 #' @export
 print_base_url <- function() {
   get_base_url()
@@ -119,6 +126,9 @@ print_base_url <- function() {
 #' it changes depending on the trading environment.
 #'
 #' @return account number
+#'
+#' @examples
+#' \dontrun{print_cano()}
 #'
 #' @export
 print_cano <- function() {
@@ -139,6 +149,9 @@ print_cano <- function() {
 #'
 #' @return account product code
 #'
+#' @examples
+#' \dontrun{print_acnt_prdt_cd()}
+#'
 #' @export
 print_acnt_prdt_cd <- function() {
   is_paper <- is_paper_trading()
@@ -158,6 +171,9 @@ print_acnt_prdt_cd <- function() {
 #'
 #' @return app key
 #'
+#' @examples
+#' \dontrun{print_app_key()}
+#'
 #' @export
 print_app_key <- function() {
   is_paper <- is_paper_trading()
@@ -176,6 +192,9 @@ print_app_key <- function() {
 #' it changes depending on the trading environment.
 #'
 #' @return app secret
+#'
+#' @examples
+#' \dontrun{print_app_secret()}
 #'
 #' @export
 print_app_secret <- function() {

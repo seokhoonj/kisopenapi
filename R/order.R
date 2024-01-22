@@ -19,12 +19,11 @@
 #'   order_price = "your order price"
 #' )
 #' ## sell
-#'kis_sell(
+#' kis_sell(
 #'   stock_code = "stock code",
 #'   order_qty = "your order quantity",
 #'   order_price = "your order price"
-#' )
-#' }
+#' )}
 #'
 #' @return An order result
 kis_order <- function(stock_code, order_qty, order_price, prdt_code,

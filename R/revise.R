@@ -27,8 +27,7 @@
 #'   order_price = "your order price"
 #' )
 #' ## cancel all
-#' kis_cancel_all()
-#'}
+#' kis_cancel_all()}
 #'
 #' @return response
 kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,

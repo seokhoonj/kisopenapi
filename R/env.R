@@ -9,7 +9,7 @@
 #' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account) \cr
 #' KIS_APP_KEY="YOUR APP KEY" \cr
 #' KIS_APP_SECRET="YOUR APP SECRET" \cr
-#' \cr
+#'
 #' # For paper trading \cr
 #' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account) \cr
 #' KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account) \cr

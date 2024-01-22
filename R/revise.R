@@ -12,6 +12,22 @@
 #' @param cncl_dv A string specifying revise(01) or cancel(02)
 #' @param qty_all_yn A string specifying total order quantity or not
 #'
+#' @examples
+#' ## revise & cancel
+#' \dontrun{kis_revise(
+#'   order_no = "your order number",
+#'   order_branch = "your order branch", order_qty = "your order quantity",
+#'   order_price = "your order price"
+#')}
+#' \dontrun{kis_cancel(
+#'   order_no = "your order number",
+#'   order_branch = "your order branch", order_qty = "your order quantity",
+#'   order_price = "your order price"
+#')}
+#'
+#' ## cancel all
+#' \dontrun{kis_cancel_all()}
+#'
 #' @return response
 kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
                               prdt_code, order_dv = "00",

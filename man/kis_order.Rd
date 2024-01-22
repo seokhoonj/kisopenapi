@@ -38,3 +38,17 @@ An order result
 \description{
 Order stocks.
 }
+\examples{
+## buy & sell
+\dontrun{kis_buy(
+  stock_code = "stock code",
+  order_qty = "your order quantity",
+  order_price = "your order price"
+)}
+\dontrun{kis_sell(
+  stock_code = "stock code",
+  order_qty = "your order quantity",
+  order_price = "your order price"
+)}
+
+}

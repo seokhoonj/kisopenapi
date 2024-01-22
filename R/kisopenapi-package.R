@@ -23,7 +23,7 @@
 #' explicitly specified as function arguments).
 #' @keywords internal
 #' @importFrom cli style_hyperlink
-#' @importFrom data.table data.table rbindlist
+#' @importFrom data.table data.table rbindlist shift
 #' @importFrom httr2 req_body_json req_error req_headers req_perform
 #'  req_url_query request resp_body_json
 #' @importFrom jsonlite toJSON

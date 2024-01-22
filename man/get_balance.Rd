@@ -4,14 +4,24 @@
 \alias{get_balance}
 \title{get account balance}
 \usage{
-get_balance(prdt_code)
+get_balance(prdt_code, rt_cash_flag = FALSE)
 }
 \arguments{
 \item{prdt_code}{A string specifying account product code}
+
+\item{rt_cash_flag}{A boolean specifying total deposit or not}
 }
 \value{
 balance data.frame
 }
 \description{
 Get your account balance
+}
+\examples{
+## get account balance
+\dontrun{
+  get_balance(rt_cash_flag = TRUE)
+  get_balance(rt_cash_flag = FALSE)
+}
+
 }

@@ -118,6 +118,40 @@ get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
   }
 }
 
+#' @title get stock history by ohlcv
+#'
+#' @description
+#' Get stock history by open, high, low, close, volume.
+#'
+#' @param stock_code A string specifying stock code
+#' @param unit A string specifying day, week, month
+#' @param add_var A boolean adding volitility and percentage change
+#' @return stock history by ohlcv data frame
+#'
+#' @examples
+#' ## get stock history
+#' \dontrun{get_stock_history_by_ohlcv("005930")}
+#'
+#' @export
+get_stock_history_by_ohlcv <- function(stock_code, unit = "D",
+                                       add_var = FALSE) {
+  df <- get_stock_history(stock_code, unit = unit)
+  if (nrow(df) > 0) {
+    chosend_fld <- c("stck_bsop_date", "stck_oprc", "stck_hgpr", "stck_lwpr",
+                     "stck_clpr", "acml_vol")
+    renamed_fld <- c("date", "open", "high", "low", "close", "volume")
+    df <- df[, chosend_fld, drop = FALSE]
+    names(df) <- renamed_fld
+    df[] <- lapply(df, as.numeric)
+    df$date <- as.Date(as.character(df$date), "%Y%m%d")
+    if (add_var) {
+      df$inter_volatile <- (df$high - df$low) / df$close
+      df$pct_change <- (df$close - data.table::shift(df$close, n = -1))/data.table::shift(df$close, n = -1) * 100
+    }
+  }
+  return(df)
+}
+
 #' @title get stock investor
 #'
 #' @description
@@ -145,7 +179,18 @@ get_stock_investor <- function(stock_code) {
 
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
-      return(data.frame(data.table::rbindlist(resp$output)))
+      df <- data.frame(data.table::rbindlist(resp$output))
+      if (nrow(df) > 0) {
+        chosend_fld <- c("stck_bsop_date", "prsn_ntby_qty", "frgn_ntby_qty",
+                         "orgn_ntby_qty")
+        renamed_fld <- c("date", "perbuy", "forbuy", "orgbuy")
+        df <- df[, chosend_fld, drop = FALSE]
+        names(df) <- renamed_fld
+        df[] <- lapply(df, as.numeric)
+        df$date <- as.Date(as.character(df$date), "%Y%m%d")
+        df$etcbuy <- (df$perbuy + df$forbuy + df$orgbuy) * -1
+      }
+      return(df)
     } else if (resp$msg_cd == "EGW00123") {
       set_auth()
       get_stock_investor(stock_code)

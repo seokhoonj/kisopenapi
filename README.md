@@ -92,7 +92,8 @@ readRenviron("~/.Renviron") # alternatively, .rs.restartR()
 ``` r
 # get balance
 # 계좌잔고 확인
-get_balance()
+get_balance() # details (data.frame)
+get_balance(rt_cash_flag = TRUE) # total deposit (numeric)
 
 # get current price (samsung electronics)
 # 가격 데이터 추출 (삼성전자)
@@ -105,6 +106,7 @@ get_stock_qutoes("005930")
 # get history data (samsung electronics)
 # 가격 history 데이터 추출 (삼성전자) (현재 30개 제한)
 get_stock_history("005930", unit = "D") # unit: D(day), W(week), M(month)
+get_stock_history_by_ohlcv("005930", unit = "D", add_var = TRUE)
 
 # get stock investors (samsung electronics)
 # 투자자 데이터 추출 (삼성전자)
@@ -138,7 +140,7 @@ get_order_history(sdt = "20240102")
 # 주문 정정 (`get_orders()` 함수를 통해 정보 취득)
 kis_revise(
   order_no = "your order number", order_branch = "your order branch",
-  order_qty = 1, order_price = "price_you_want"
+  order_qty = 1, order_price = "price you want"
 )
 
 # cancel

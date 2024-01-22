@@ -4,11 +4,19 @@
 #' Get your account balance
 #'
 #' @param prdt_code A string specifying account product code
+#' @param rt_cash_flag A boolean specifying total deposit or not
 #'
 #' @return balance data.frame
 #'
+#' @examples
+#' ## get account balance
+#' \dontrun{
+#'   get_balance(rt_cash_flag = TRUE)
+#'   get_balance(rt_cash_flag = FALSE)
+#' }
+#'
 #' @export
-get_balance <- function(prdt_code) {
+get_balance <- function(prdt_code, rt_cash_flag = FALSE) {
   api_url <- "uapi/domestic-stock/v1/trading/inquire-balance"
   tr_id <- "TTTC8434R"
 
@@ -34,7 +42,17 @@ get_balance <- function(prdt_code) {
 
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
-      return(data.frame(resp$output2[[1L]]))
+      if (rt_cash_flag) {
+        return(as.numeric(resp$output2[[1L]]$dnca_tot_amt))
+      } else {
+        df <- data.frame(data.table::rbindlist(resp$output1))
+        if (nrow(df) > 0) {
+          cols <- c("prdt_name","hldg_qty", "ord_psbl_qty", "pchs_avg_pric", "evlu_pfls_rt", "prpr", "bfdy_cprs_icdc", "fltt_rt")
+          df <- df[, cols, drop = FALSE]
+          df[, -1] <- lapply(df[, -1], as.numeric)
+        }
+        return(df)
+      }
     } else if (resp$msg_cd == "EGW00123") {
       set_auth()
       get_balance()

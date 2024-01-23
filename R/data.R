@@ -7,8 +7,10 @@
 #' @return current stock price
 #'
 #' @examples
-#' ## get current price
-#' \dontrun{get_current_price("005930")}
+#' # get current price
+#' \dontrun{
+#' get_current_price("005930")
+#' }
 #'
 #' @export
 get_current_price <- function(stock_code) {
@@ -30,10 +32,10 @@ get_current_price <- function(stock_code) {
       set_auth()
       get_current_price(stock_code)
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -46,8 +48,10 @@ get_current_price <- function(stock_code) {
 #' @return current stock quotes data frame
 #'
 #' @examples
-#' ## get stock quotes
-#' \dontrun{get_stock_quotes("005930")}
+#' # get stock quotes
+#' \dontrun{
+#' get_stock_quotes("005930")
+#' }
 #'
 #' @export
 get_stock_quotes <- function(stock_code) {
@@ -70,10 +74,10 @@ get_stock_quotes <- function(stock_code) {
       set_auth()
       get_stock_quotes(stock_code)
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -87,13 +91,16 @@ get_stock_quotes <- function(stock_code) {
 #' @return stock history data frame
 #'
 #' @examples
-#' ## get stock history
-#' \dontrun{get_stock_history("005930")}
+#' # get stock history
+#' \dontrun{
+#' get_stock_history("005930")
+#' }
 #'
 #' @export
 get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
   api_url <- "uapi/domestic-stock/v1/quotations/inquire-daily-price"
   tr_id <- "FHKST01010400"
+
   params <- list(
     "fid_cond_mrkt_div_code" = "J",
     "fid_input_iscd" = stock_code,
@@ -111,10 +118,10 @@ get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
       set_auth()
       get_stock_history(stock_code)
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -129,8 +136,10 @@ get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
 #' @return stock history by ohlcv data frame
 #'
 #' @examples
-#' ## get stock history
-#' \dontrun{get_stock_history_by_ohlcv("005930")}
+#' # get stock history
+#' \dontrun{
+#' get_stock_history_by_ohlcv("005930")
+#' }
 #'
 #' @export
 get_stock_history_by_ohlcv <- function(stock_code, unit = "D",
@@ -146,7 +155,8 @@ get_stock_history_by_ohlcv <- function(stock_code, unit = "D",
     df$date <- as.Date(as.character(df$date), "%Y%m%d")
     if (add_var) {
       df$inter_volatile <- (df$high - df$low) / df$close
-      df$pct_change <- (df$close - data.table::shift(df$close, n = -1))/data.table::shift(df$close, n = -1) * 100
+      df$pct_change <- (df$close - data.table::shift(df$close, n = -1)) /
+        data.table::shift(df$close, n = -1) * 100
     }
   }
   return(df)
@@ -161,8 +171,10 @@ get_stock_history_by_ohlcv <- function(stock_code, unit = "D",
 #' @return stock investor data frame
 #'
 #' @examples
-#' ## get stock investor
-#' \dontrun{get_stock_investor("005930")}
+#' # get stock investor
+#' \dontrun{
+#' get_stock_investor("005930")
+#' }
 #'
 #' @export
 get_stock_investor <- function(stock_code) {
@@ -195,9 +207,9 @@ get_stock_investor <- function(stock_code) {
       set_auth()
       get_stock_investor(stock_code)
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }

@@ -1,10 +1,13 @@
 Package: kisopenapi
-Title: Korea Investment & Securities Open Trading API
+Title: Korea Investment & Securities (KIS) Open Trading API
 Version: 0.0.1
 Authors@R: 
     person(given = "Seokhoon", family = "Joo", role = c("aut", "cre"),
            email = "seokhoonj@gmail.com")
-Description: API Wrapper to use Korea Investment & Securities trading system.
+Description: API Wrapper to use Korea Investment & Securities (KIS) trading 
+             system that provides various financial services like stock price 
+             check, orders and balance check 
+             <https://apiportal.koreainvestment.com/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.5.0)

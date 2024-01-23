@@ -33,6 +33,9 @@ kis_sell(stock_code, order_qty, order_price, prdt_code, order_type = "00")
 \item{buy_flag}{A boolean specifying flag}
 }
 \value{
+A list contains rt_cd: return code, msg_cd: message code,
+msg1: message
+
 An order result
 }
 \description{
@@ -51,6 +54,7 @@ kis_sell(
   stock_code = "stock code",
   order_qty = "your order quantity",
   order_price = "your order price"
-)}
+)
+}
 
 }

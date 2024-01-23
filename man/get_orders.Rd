@@ -14,6 +14,8 @@ Return a list of orders that can be revised or canceled.
 }
 \examples{
 # get a list of orders
-\dontrun{get_orders()}
+\dontrun{
+get_orders()
+}
 
 }

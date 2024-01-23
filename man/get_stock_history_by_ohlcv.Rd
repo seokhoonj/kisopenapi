@@ -20,7 +20,9 @@ stock history by ohlcv data frame
 Get stock history by open, high, low, close, volume.
 }
 \examples{
-## get stock history
-\dontrun{get_stock_history_by_ohlcv("005930")}
+# get stock history
+\dontrun{
+get_stock_history_by_ohlcv("005930")
+}
 
 }

@@ -16,7 +16,9 @@ current stock quotes data frame
 Get current stock qutoes.
 }
 \examples{
-## get stock quotes
-\dontrun{get_stock_quotes("005930")}
+# get stock quotes
+\dontrun{
+get_stock_quotes("005930")
+}
 
 }

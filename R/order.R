@@ -9,6 +9,8 @@
 #' @param prdt_code A string specifying account product code
 #' @param buy_flag A boolean specifying flag
 #' @param order_type A string specifying order type
+#' @return A list contains rt_cd: return code, msg_cd: message code,
+#' msg1: message
 #'
 #' @examples
 #' \dontrun{
@@ -23,7 +25,8 @@
 #'   stock_code = "stock code",
 #'   order_qty = "your order quantity",
 #'   order_price = "your order price"
-#' )}
+#' )
+#' }
 #'
 #' @return An order result
 kis_order <- function(stock_code, order_qty, order_price, prdt_code,
@@ -52,9 +55,8 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
 
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
       return(resp)
-    } else if (resp$msg1 == "EGW00123") {
+    } else if (resp$msg1 == "EGW00123") { # access token is expired.
       set_auth()
       kis_order(
         stock_code = stock_code, order_qty = order_qty,
@@ -62,10 +64,10 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
         order_type = order_type, buy_flag = buy_flag
       )
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -102,7 +104,9 @@ kis_sell <- function(stock_code, order_qty, order_price, prdt_code,
 #'
 #' @examples
 #' # get a list of orders
-#' \dontrun{get_orders()}
+#' \dontrun{
+#' get_orders()
+#' }
 #'
 #' @export
 get_orders <- function() {
@@ -139,58 +143,10 @@ get_orders <- function() {
       set_auth()
       get_orders()
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
-  }
-}
-
-#' @title get buyable cash
-#'
-#' @description
-#' Get buyable amount of cash of the account
-#'
-#' @param prdt_code A string specifying account product code
-#'
-#' @return A numeric specifying buyable cash
-#'
-#' @examples
-#' # get buyable cash
-#' \dontrun{get_buyable_cash()}
-#'
-#' @export
-get_buyable_cash <- function(prdt_code) {
-  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
-  tr_id <- "TTTC8908R"
-
-  if (missing(prdt_code))
-    prdt_code <- get_acnt_prdt_cd()
-
-  params <- lapply(list(
-    "CANO" = get_cano(),
-    "ACNT_PRDT_CD" = prdt_code,
-    "PDNO" = "",
-    "ORD_UNPR" = "0",
-    "ORD_DVSN" = "02",
-    "CMA_EVLU_AMT_ICLD_YN" = "Y",
-    "OVRS_ICLD_YN" = "N"
-  ), as.character)
-
-  res <- url_fetch(api_url, tr_id, params)
-  resp <- res |> resp_body_json()
-
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(as.numeric(resp$output$ord_psbl_cash))
-    } else if (resp$msg_cd == "EGW00123") {
-      set_auth()
-      get_buyable_cash()
-    } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
-    }
-  } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -203,12 +159,13 @@ get_buyable_cash <- function(prdt_code) {
 #' @param edt A string specifying end date "YYYYMMDD"
 #' @param prdt_code A string specifying account product code
 #' @param zip_flag A boolean specifying choosing important columns
-#'
 #' @return Order history data frame
 #'
 #' @examples
 #' # get order history
-#' \dontrun{get_order_history("20")}
+#' \dontrun{
+#' get_order_history("20")
+#' }
 #'
 #' @export
 get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
@@ -253,13 +210,62 @@ get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
       } else {
         return(output)
       }
-    } else if (resp$msg_cd == "EGW00123") {
+    } else if (resp$msg_cd == "EGW00123") { # access token is expired.
       set_auth()
       get_order_history()
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
+  }
+}
+
+#' @title get buyable cash
+#'
+#' @description
+#' Get buyable amount of cash of the account
+#'
+#' @param prdt_code A string specifying account product code
+#' @return A numeric specifying buyable cash
+#'
+#' @examples
+#' # get buyable cash
+#' \dontrun{
+#' get_buyable_cash()
+#' }
+#'
+#' @export
+get_buyable_cash <- function(prdt_code) {
+  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
+  tr_id <- "TTTC8908R"
+
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
+
+  params <- lapply(list(
+    "CANO" = get_cano(),
+    "ACNT_PRDT_CD" = prdt_code,
+    "PDNO" = "",
+    "ORD_UNPR" = "0",
+    "ORD_DVSN" = "02",
+    "CMA_EVLU_AMT_ICLD_YN" = "Y",
+    "OVRS_ICLD_YN" = "N"
+  ), as.character)
+
+  res <- url_fetch(api_url, tr_id, params)
+  resp <- res |> resp_body_json()
+
+  if (res$status_code == 200) {
+    if (resp$rt_cd == "0") {
+      return(as.numeric(resp$output$ord_psbl_cash))
+    } else if (resp$msg_cd == "EGW00123") { # access token is expired.
+      set_auth()
+      get_buyable_cash()
+    } else {
+      return(resp)
+    }
+  } else {
+    return(res$status_code)
   }
 }

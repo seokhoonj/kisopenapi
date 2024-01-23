@@ -18,7 +18,9 @@ stock history data frame
 Get stock history.
 }
 \examples{
-## get stock history
-\dontrun{get_stock_history("005930")}
+# get stock history
+\dontrun{
+get_stock_history("005930")
+}
 
 }

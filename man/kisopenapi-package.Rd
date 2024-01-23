@@ -4,8 +4,11 @@
 \name{kisopenapi-package}
 \alias{kisopenapi}
 \alias{kisopenapi-package}
-\title{kisopenapi: Korea Investment & Securities Open Trading API}
+\title{kisopenapi: Korea Investment & Securities (KIS) Open Trading API}
 \description{
+This package allows users to easily access various financial services using
+the trading open API provided by Korea Investment & Securities (KIS).
+the KIS open API provides request/reponse information and error messages.
 To use this package, you will first need to open a Korea investment &
 securities account, and get your app key and app secret from the website
 \url{https://apiportal.koreainvestment.com/}. Once you have your app key and
@@ -29,8 +32,12 @@ KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"
 Any functions that require your environemt variables try to retrieve those via
 \code{Sys.getenv("KIS_CANO")}, \code{Sys.getenv("KIS_ACNT_PRDT_CD")},
 \code{Sys.getenv("KIS_APP_KEY")}, \code{Sys.getenv("KIS_APP_SECRET")}
+\code{Sys.getenv("KIS_PAPER_CANO")}, \code{Sys.getenv("KIS_PAPER_ACNT_PRDT_CD")},
+\code{Sys.getenv("KIS_PAPER_APP_KEY")}, \code{Sys.getenv("KIS_PAPER_APP_SECRET")}
 (unless account number, account product code, app key and app secret are
 explicitly specified as function arguments).
+and you've already registered both trading environment variables(live and
+paper), you can easily change the environment and use the same functions.
 }
 
 \author{

@@ -17,6 +17,8 @@ Get buyable amount of cash of the account
 }
 \examples{
 # get buyable cash
-\dontrun{get_buyable_cash()}
+\dontrun{
+get_buyable_cash()
+}
 
 }

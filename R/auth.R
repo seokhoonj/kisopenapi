@@ -1,11 +1,16 @@
 #' @title set access token
 #'
 #' @description
-#' Set access token using kis app key and kis app secret.
+#' Set access token (hash key) using kis app key and kis app secret.
+#'
+#' @return An access token (access token is stored in environment variable
+#' at the same time)
 #'
 #' @examples
 #' # set authentification
-#' \dontrun{set_auth()}
+#' \dontrun{
+#' set_auth()
+#' }
 #'
 #' @export
 set_auth <- function() {

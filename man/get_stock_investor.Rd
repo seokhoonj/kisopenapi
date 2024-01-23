@@ -16,7 +16,9 @@ stock investor data frame
 Get stock investor data using KIS API.
 }
 \examples{
-## get stock investor
-\dontrun{get_stock_investor("005930")}
+# get stock investor
+\dontrun{
+get_stock_investor("005930")
+}
 
 }

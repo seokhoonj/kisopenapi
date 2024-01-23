@@ -16,7 +16,9 @@ current stock price
 Get current stock price.
 }
 \examples{
-## get current price
-\dontrun{get_current_price("005930")}
+# get current price
+\dontrun{
+get_current_price("005930")
+}
 
 }

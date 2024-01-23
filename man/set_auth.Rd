@@ -12,11 +12,17 @@ get_auth()
 
 print_auth()
 }
+\value{
+An access token (access token is stored in environment variable
+at the same time)
+}
 \description{
-Set access token using kis app key and kis app secret.
+Set access token (hash key) using kis app key and kis app secret.
 }
 \examples{
 # set authentification
-\dontrun{set_auth()}
+\dontrun{
+set_auth()
+}
 
 }

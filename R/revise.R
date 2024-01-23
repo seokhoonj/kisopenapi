@@ -11,23 +11,30 @@
 #' @param order_dv A string specifying limit order(00) or market order(01)
 #' @param cncl_dv A string specifying revise(01) or cancel(02)
 #' @param qty_all_yn A string specifying total order quantity or not
+#' @return A list contains rt_cd: return code, msg_cd: message code,
+#' msg1: message
 #'
 #' @examples
-#' \dontrun{
 #' ## revise
+#' \dontrun{
 #' kis_revise(
 #'   order_no = "your order number",
 #'   order_branch = "your order branch", order_qty = "your order quantity",
 #'   order_price = "your order price"
 #' )
+#' }
 #' ## cancel
+#' \dontrun{
 #' kis_cancel(
 #'   order_no = "your order number",
 #'   order_branch = "your order branch", order_qty = "your order quantity",
 #'   order_price = "your order price"
 #' )
+#' }
 #' ## cancel all
-#' kis_cancel_all()}
+#' \dontrun{
+#' kis_cancel_all()
+#' }
 #'
 #' @return response
 kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
@@ -58,7 +65,6 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
 
   if (res$status_code == 200) {
     if (resp$rt_cd == "0") {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
       return(resp)
     } else if (resp$msg1 == "EGW00123") {
       set_auth()
@@ -68,10 +74,10 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
         cncl_dv = cncl_dv, qty_all_yn = qty_all_yn
       )
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      return(resp)
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    return(res$status_code)
   }
 }
 
@@ -128,8 +134,6 @@ kis_cancel_all <- function() {
         kis_cancel(order_list[i], qty_list[i], price_list[i], branch_list[i])
         Sys.sleep(.2)
       }
-    } else {
-      cat("No orders")
     }
   }
 }

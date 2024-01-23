@@ -23,6 +23,8 @@ Get order history from start date to end date.
 }
 \examples{
 # get order history
-\dontrun{get_order_history("20")}
+\dontrun{
+get_order_history("20")
+}
 
 }

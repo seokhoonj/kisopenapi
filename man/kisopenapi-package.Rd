@@ -30,17 +30,20 @@ KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (your paper account)\cr
 KIS_PAPER_ACNT_PRDT_CD="01" (your paper account product code mainly \code{01})\cr
 KIS_PAPER_APP_KEY="YOUR PAPER APP KEY"\cr
 KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"\cr
+
 Any functions that require your environemt variables try to retrieve those via\cr
-\code{Sys.getenv("KIS_CANO")},\cr
-\code{Sys.getenv("KIS_ACNT_PRDT_CD")},\cr
-\code{Sys.getenv("KIS_APP_KEY")},\cr
-\code{Sys.getenv("KIS_APP_SECRET")},\cr
-\code{Sys.getenv("KIS_PAPER_CANO")},\cr
-\code{Sys.getenv("KIS_PAPER_ACNT_PRDT_CD")},\cr
-\code{Sys.getenv("KIS_PAPER_APP_KEY")},\cr
+
+\code{Sys.getenv("KIS_CANO")}\cr
+\code{Sys.getenv("KIS_ACNT_PRDT_CD")}\cr
+\code{Sys.getenv("KIS_APP_KEY")}\cr
+\code{Sys.getenv("KIS_APP_SECRET")}\cr
+\code{Sys.getenv("KIS_PAPER_CANO")}\cr
+\code{Sys.getenv("KIS_PAPER_ACNT_PRDT_CD")}\cr
+\code{Sys.getenv("KIS_PAPER_APP_KEY")}\cr
 \code{Sys.getenv("KIS_PAPER_APP_SECRET")}\cr
-(unless account number, account product code, app key and app secret are
-explicitly specified as function arguments). and if you've already registered
+
+unless account number, account product code, app key and app secret are
+explicitly specified as function arguments. and if you've already registered
 both trading environment variables(live and paper), you can easily change the
 environment and use the same functions.
 }

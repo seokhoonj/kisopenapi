@@ -11,14 +11,14 @@
 #' Alternatively, you can set those permanently by adding the following line to
 #' your .Renviron file:
 #' # For real trading
-#' KIS_CANO="YOUR ACCOUNT NUMBER" (first 8 digits of your account)\cr
-#' KIS_ACNT_PRDT_CD="01" (last 2 digits of your account)\cr
+#' KIS_CANO="YOUR ACCOUNT NUMBER" (your account)\cr
+#' KIS_ACNT_PRDT_CD="01" (your account product code, mainly `01`)\cr
 #' KIS_APP_KEY="YOUR APP KEY"\cr
 #' KIS_APP_SECRET="YOUR APP SECRET"
 #' # For paper trading
-#' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (first 8 digits of your paper account)\cf
-#' KIS_PAPER_ACNT_PRDT_CD="01" (last 2 digits of your paper account)\cf
-#' KIS_PAPER_APP_KEY="YOUR PAPER APP KEY"\cf
+#' KIS_PAPER_CANO="YOUR PAPER ACCOUNT NUMBER" (your paper account)\cr
+#' KIS_PAPER_ACNT_PRDT_CD="01" (your paper account product code mainly `01`)\cr
+#' KIS_PAPER_APP_KEY="YOUR PAPER APP KEY"\cr
 #' KIS_PAPER_APP_SECRET="YOUR PAPER APP SECRET"\cr
 #' Any functions that require your environemt variables try to retrieve those via\cr
 #' \code{Sys.getenv("KIS_CANO")},\cr

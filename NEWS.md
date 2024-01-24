@@ -1,3 +1,7 @@
-# kisopenapi 0.0.1
+# kisopenapi (development version)
 
-* Added a `NEWS.md` file to track changes to the package.
+# kisopenapi 0.0.2
+
+## bug fixes
+
+-   A return value typo error (livr -\> live) is modified in `print_trading_env()`.

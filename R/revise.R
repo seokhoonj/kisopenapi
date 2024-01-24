@@ -123,7 +123,7 @@ kis_cancel <- function(order_no, order_branch, order_qty, order_price,
 #' @export
 kis_cancel_all <- function() {
   orders <- get_orders()
-  if (!is.null(orders)) {
+  if (inherits(orders, "data.frame")) {
     n <- nrow(orders)
     if (n > 0) {
       order_list <- as.numeric(orders$odno)
@@ -135,5 +135,7 @@ kis_cancel_all <- function() {
         Sys.sleep(.2)
       }
     }
+  } else {
+    return(orders)
   }
 }

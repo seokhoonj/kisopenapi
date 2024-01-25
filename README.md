@@ -101,7 +101,7 @@ get_current_price("005930")
 
 # get stock quotes (samsung electronic)
 # 시세 데이터 추출 (삼성전자) (현재 30개 제한)
-get_stock_qutoes("005930")
+get_stock_quotes("005930")
 
 # get history data (samsung electronics)
 # 가격 history 데이터 추출 (삼성전자) (현재 30개 제한)

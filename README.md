@@ -27,6 +27,10 @@ Korea Investment & Securites (KIS) Open Trading API using R
 ## Installation
 
 ``` r
+# install from CRAN
+install.packages("kisopenapi")
+
+# install dev version
 devtools::install_packages("seokhoonj/kisopenapi")
 ```
 

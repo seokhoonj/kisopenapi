@@ -165,6 +165,10 @@ print_trading_env()
 
 ## New features (in-development)
 
+-   please install the dev version to use new features.
+
+-   새로운 기능을 사용하기 위해서는 dev version을 설치하시기 바랍니다.
+
 -   Referring to the official example, if the dataset does not contain English column names (only Korean column names), I made the English name myself. So there may be an error.
 
 -   영어 컬럼명이 없고 한글 컬럼명만 있을 경우 직접 네이밍하였으므로 오류가 있을 수 있습니다.

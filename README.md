@@ -169,6 +169,8 @@ print_trading_env()
 
 -   영어 컬럼명이 없고 한글 컬럼명만 있을 경우 직접 네이밍하였으므로 오류가 있을 수 있습니다.
 
+### kospi master
+
 ``` r
 # download `kospi_code.mst` file
 # `kospi_code.mst` 파일 다운로드
@@ -181,6 +183,22 @@ kospi_master <- get_kospi_master_dataframe()
 # can check English and Korean column names of kospi master file 
 # 컬럼명을 확인할 수 있다 
 kospi_master_columns
+```
+
+### kosdaq master
+
+``` r
+# download `kosdaq_code.mst` file
+# `kosdaq_code.mst` 파일 다운로드
+download_kosdaq_master()
+
+# get kosdaq master data frame from `kosdaq_code_mst` file
+# `kosdaq_code.mst` 파일에서 데이터 추출
+kosdaq_master <- get_kosdaq_master_dataframe()
+
+# can check English and Korean column names of kosdaq master file 
+# 컬럼명을 확인할 수 있다 
+kosdaq_master_columns
 ```
 
 ## Reference

@@ -4,7 +4,9 @@
 
 * `kospi_master_download()` and `get_kospi_master_dataframe()` functions are added. if you execute these two functions sequentially, you can obtain the KOSPI master data frame. and it contains a lot of informations.
 
-* `kospi_master_columns` contains English and Korean column names.
+* `kosdaq_master_download()` and `get_kosdaq_master_dataframe()` functions are same as above.
+
+* `kospi_master_columns` and `kosdaq_master_columns` datasets contain English and Korean column names.
 
 # kisopenapi 0.0.2
 

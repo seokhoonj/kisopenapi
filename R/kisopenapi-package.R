@@ -36,11 +36,15 @@
 #' explicitly specified as function arguments. and if you've already registered
 #' both trading environment variables(live and paper), you can easily change the
 #' environment and use the same functions.
+#'
+#' kospi_master_definition is a data frame for column definitions for both
+#' English and Korean
+#'
 #' @keywords internal
 #' @importFrom cli style_hyperlink
 #' @importFrom data.table data.table rbindlist shift
 #' @importFrom httr2 req_body_json req_error req_headers req_perform
 #'  req_url_query request resp_body_json
 #' @importFrom jsonlite toJSON
-#' @importFrom utils globalVariables head tail
+#' @importFrom utils download.file globalVariables head read.csv read.fwf tail unzip
 "_PACKAGE"

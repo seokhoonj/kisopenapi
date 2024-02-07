@@ -1,5 +1,11 @@
 # kisopenapi (development version)
 
+## new features
+
+* `kospi_master_download()` and `get_kospi_master_dataframe()` functions are added. if you execute these two functions sequentially, you can obtain the KOSPI master data frame. and it contains a lot of informations.
+
+* `kospi_master_columns` contains English and Korean column names.
+
 # kisopenapi 0.0.2
 
 ## bug fixes

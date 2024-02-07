@@ -10,6 +10,7 @@ Description: API Wrapper to use Korea Investment & Securities (KIS) trading
              <https://apiportal.koreainvestment.com/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
+LazyData: true
 Depends: R (>= 3.5.0)
 Imports:
   cli (>= 3.3.0),

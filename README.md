@@ -163,6 +163,26 @@ print_trading_env()
 # `get_orders` 함수는 모의투자에서 아직 지원되지 않는 것으로 보입니다.
 ```
 
+## New features (in-development)
+
+-   Referring to the official example, if the dataset does not contain English column names (only Korean column names), I made the English name myself. So there may be an error.
+
+-   영어 컬럼명이 없고 한글 컬럼명만 있을 경우 직접 네이밍하였으므로 오류가 있을 수 있습니다.
+
+``` r
+# download `kospi_code.mst` file
+# `kospi_code.mst` 파일 다운로드
+download_kospi_master()
+
+# get kospi master data frame from `kospi_code_mst` file
+# `kospi_code.mst` 파일에서 데이터 추출
+kospi_master <- get_kospi_master_dataframe()
+
+# can check English and Korean column names of kospi master file 
+# 컬럼명을 확인할 수 있다 
+kospi_master_columns
+```
+
 ## Reference
 
 -   KIS official git repo: <https://github.com/koreainvestment/open-trading-api/tree/main>

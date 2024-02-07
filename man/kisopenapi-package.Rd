@@ -46,6 +46,9 @@ unless account number, account product code, app key and app secret are
 explicitly specified as function arguments. and if you've already registered
 both trading environment variables(live and paper), you can easily change the
 environment and use the same functions.
+
+kospi_master_definition is a data frame for column definitions for both
+English and Korean
 }
 
 \author{

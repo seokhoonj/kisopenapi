@@ -8,6 +8,11 @@
 
 * `kospi_master_columns` and `kosdaq_master_columns` datasets contain English and Korean column names.
 
+## bug fixes
+
+* modified typo .Reviron -> .Renviron and added `usethis::edit_r_environ()` for the environment variable checking error messages.
+
+
 # kisopenapi 0.0.2
 
 ## bug fixes

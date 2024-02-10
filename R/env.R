@@ -224,7 +224,7 @@ get_cano <- function() {
     cano <- Sys.getenv("KIS_PAPER_CANO")
   }
   if (cano == "") {
-    stop("Please provide your KIS_CANO='' or KIS_PAPER_CANO='' to .Renviron",
+    stop("Please code `usethis::edit_r_environ()` and provide your KIS_CANO='' or KIS_PAPER_CANO='' to .Renviron.",
          call. = FALSE)
   }
   return(cano)
@@ -238,7 +238,7 @@ get_acnt_prdt_cd <- function() {
     acnt_prdt_cd <- Sys.getenv("KIS_PAPER_ACNT_PRDT_CD")
   }
   if (acnt_prdt_cd == "") {
-    stop("Please provide your KIS_ACNT_PRDT_CD='' or KIS_PAPER_ACNT_PRDT_CD='' to .Renviron",
+    stop("Please code `usethis::edit_r_environ()` and provide your KIS_ACNT_PRDT_CD='' or KIS_PAPER_ACNT_PRDT_CD='' to .Renviron.",
          call. = FALSE)
   }
   return(acnt_prdt_cd)
@@ -252,7 +252,7 @@ get_app_key <- function() {
     app_key <- Sys.getenv("KIS_PAPER_APP_KEY")
   }
   if (app_key == "") {
-    stop("Please provide your KIS_APP_KEY='' or KIS_PAPER_APP_KEY='' to .Renviron",
+    stop("Please code `usethis::edit_r_environ()` and provide your KIS_APP_KEY='' or KIS_PAPER_APP_KEY='' to .Renviron",
          call. = FALSE)
   }
   return(app_key)
@@ -266,7 +266,7 @@ get_app_secret <- function() {
     app_secret <- Sys.getenv("KIS_PAPER_APP_SECRET")
   }
   if (app_secret == "") {
-    stop("Please provide your KIS_APP_SECRET='' or KIS_PAPER_APP_SECRET='' to .Renviron",
+    stop("Please code `usethis::edit_r_environ()` and provide your KIS_APP_SECRET='' or KIS_PAPER_APP_SECRET='' to .Renviron",
          call. = FALSE)
   }
   return(app_secret)

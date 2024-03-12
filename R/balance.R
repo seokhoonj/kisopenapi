@@ -4,21 +4,21 @@
 #' Get your account balance.
 #'
 #' @param prdt_code A string specifying account product code
-#' @param rt_cash_flag A boolean specifying total deposit or not
+#' @param rt_cash_flag A boolean specifying deposit or details
 #'
 #' @return balance data.frame
 #'
 #' @examples
 #' ## get account balance
 #' \dontrun{
-#' # detail
+#' # details
 #' get_balance(rt_cash_flag = FALSE)
-#' # total deposit
+#' # deposit
 #' get_balance(rt_cash_flag = TRUE)}
 #'
 #' @export
 get_balance <- function(prdt_code, rt_cash_flag = FALSE) {
-  api_url <- "uapi/domestic-stock/v1/trading/inquire-balance"
+  api_url <- "/uapi/domestic-stock/v1/trading/inquire-balance"
   tr_id <- "TTTC8434R"
 
   if (missing(prdt_code))
@@ -38,29 +38,33 @@ get_balance <- function(prdt_code, rt_cash_flag = FALSE) {
     "CTX_AREA_NK100" = ""
   )
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params, post_flag = FALSE)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params, post_flag = FALSE)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
       if (rt_cash_flag) {
-        return(as.numeric(resp$output2[[1L]]$dnca_tot_amt))
+        return(as.numeric(res$output2[[1L]]$dnca_tot_amt))
       } else {
-        df <- data.frame(data.table::rbindlist(resp$output1))
+        df <- data.frame(data.table::rbindlist(res$output1))
         if (nrow(df) > 0) {
-          cols <- c("prdt_name","hldg_qty", "ord_psbl_qty", "pchs_avg_pric", "evlu_pfls_rt", "prpr", "bfdy_cprs_icdc", "fltt_rt")
+          cols <- c(
+            "pdno", "prdt_name", "hldg_qty", "ord_psbl_qty", "pchs_avg_pric",
+            "pchs_amt", "prpr", "evlu_amt", "evlu_pfls_amt", "evlu_pfls_rt",
+            "fltt_rt", "bfdy_cprs_icdc"
+          )
           df <- df[, cols, drop = FALSE]
           df[, -1] <- lapply(df[, -1], as.numeric)
         }
         return(df)
       }
-    } else if (resp$msg_cd == "EGW00123") {
+    } else if (res$msg_cd == "EGW00123") {
       set_auth()
       get_balance()
     } else {
-      cat(sprintf("%s %s %s\n", resp$rt_cd, resp$msg_cd, resp$msg1))
+      cat(sprintf("%s %s %s\n", res$rt_cd, res$msg_cd, res$msg1))
     }
   } else {
-    cat(sprintf("Error Code : %s\n", res$status_code))
+    cat(sprintf("Error Code : %s\n", resp$status_code))
   }
 }

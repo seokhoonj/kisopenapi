@@ -54,7 +54,7 @@ get_balance <- function(prdt_code, rt_cash_flag = FALSE) {
             "fltt_rt", "bfdy_cprs_icdc"
           )
           df <- df[, cols, drop = FALSE]
-          df[, -1] <- lapply(df[, -1], as.numeric)
+          df[, -c(1:2)] <- lapply(df[, -c(1:2)], as.numeric)
         }
         return(df)
       }

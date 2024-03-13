@@ -61,7 +61,7 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
 
   resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    post_flag = TRUE, hash_flag = TRUE)
-  res <- res |> resp_body_json()
+  res <- resp |> resp_body_json()
 
   if (resp$status_code == 200) {
     if (res$rt_cd == "0") {

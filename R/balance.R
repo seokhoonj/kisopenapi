@@ -68,3 +68,37 @@ get_balance <- function(prdt_code, rt_cash_flag = FALSE) {
     cat(sprintf("Error Code : %s\n", resp$status_code))
   }
 }
+
+get_account <- function(prdt_code) {
+  api_url <- "/uapi/domestic-stock/v1/trading/inquire-account-balance"
+  tr_id <- "CTRP6548R"
+
+  if (missing(prdt_code))
+    prdt_code <- get_acnt_prdt_cd()
+
+  params <- list(
+    "CANO" = get_cano(),
+    "ACNT_PRDT_CD" = prdt_code,
+    "INQR_DVSN_1" = "",
+    "BSPR_BF_DT_APLY_YN" = ""
+  )
+
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params, post_flag = FALSE)
+  res <- resp |> resp_body_json()
+
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      df <- data.frame(res$output2)
+      df[] <- lapply(df, as.numeric)
+      return(df)
+    } else if (res$msg_cd == "EGW00123") {
+      set_auth()
+      get_account()
+    } else {
+      return(res)
+    }
+  } else {
+    return(resp$status_code)
+  }
+
+}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/master.R
 \name{get_kosdaq_master_dataframe}
 \alias{get_kosdaq_master_dataframe}
-\title{Get kosdaq master data frame}
+\title{get kosdaq master data frame}
 \usage{
 get_kosdaq_master_dataframe(base_dir)
 }

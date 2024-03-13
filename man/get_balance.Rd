@@ -9,7 +9,7 @@ get_balance(prdt_code, rt_cash_flag = FALSE)
 \arguments{
 \item{prdt_code}{A string specifying account product code}
 
-\item{rt_cash_flag}{A boolean specifying total deposit or not}
+\item{rt_cash_flag}{A boolean specifying deposit or details}
 }
 \value{
 balance data.frame
@@ -20,9 +20,9 @@ Get your account balance.
 \examples{
 ## get account balance
 \dontrun{
-# detail
+# details
 get_balance(rt_cash_flag = FALSE)
-# total deposit
+# deposit
 get_balance(rt_cash_flag = TRUE)}
 
 }

@@ -16,6 +16,7 @@ Imports:
   cli (>= 3.3.0),
   data.table (>= 1.14.2),
   httr2 (>= 0.2.2),
-  jsonlite (>= 1.8.0)
+  jsonlite (>= 1.8.0),
+  stringi (>= 1.7.6)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

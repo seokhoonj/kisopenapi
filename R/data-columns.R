@@ -1,6 +1,6 @@
 #' kospi and kosdaq master columns
 #'
-#' These datassets contain both English and Korean column names.
+#' These datasets contain both English and Korean column names.
 #'
 #' @format data.frame
 #' @examples

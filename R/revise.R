@@ -41,7 +41,7 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
                               prdt_code, order_dv = "00",
                               cncl_dv = c("01", "02"),
                               qty_all_yn = c("Y", "N")) {
-  api_url <- "uapi/domestic-stock/v1/trading/order-rvsecncl"
+  api_url <- "/uapi/domestic-stock/v1/trading/order-rvsecncl"
   tr_id <- "TTTC0803U"
 
   if (missing(prdt_code))
@@ -59,14 +59,14 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
     "QTY_ALL_ORD_YN" = qty_all_yn[[1L]]
   ), as.character)
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    post_flag = TRUE, hash_flag = TRUE)
-  resp <- res |> resp_body_json()
+  res <- res |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(resp)
-    } else if (resp$msg1 == "EGW00123") {
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(res)
+    } else if (res$msg1 == "EGW00123") {
       set_auth()
       kis_revise_cancel(
         order_no = order_no, order_branch = order_branch, order_qty = order_qty,
@@ -74,10 +74,10 @@ kis_revise_cancel <- function(order_no, order_branch, order_qty, order_price,
         cncl_dv = cncl_dv, qty_all_yn = qty_all_yn
       )
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
 

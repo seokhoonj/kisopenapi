@@ -2,7 +2,7 @@
 % Please edit documentation in R/master.R
 \name{download_kospi_master}
 \alias{download_kospi_master}
-\title{Download kospi master file}
+\title{download kospi master file}
 \usage{
 download_kospi_master(base_dir)
 }

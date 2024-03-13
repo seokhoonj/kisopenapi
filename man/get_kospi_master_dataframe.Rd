@@ -2,7 +2,7 @@
 % Please edit documentation in R/master.R
 \name{get_kospi_master_dataframe}
 \alias{get_kospi_master_dataframe}
-\title{Get kospi master data frame}
+\title{get kospi master data frame}
 \usage{
 get_kospi_master_dataframe(base_dir)
 }

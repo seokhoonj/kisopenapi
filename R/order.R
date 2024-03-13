@@ -1,14 +1,13 @@
-#' @title KIS order
+#' KIS order
 #'
-#' @description
 #' Order stocks.
 #'
 #' @param stock_code A string specifying stock code
 #' @param order_qty A numeric or string specifying order quantity
 #' @param order_price A numeric or string specifying order price
 #' @param prdt_code A string specifying account product code
-#' @param buy_flag A boolean specifying flag
 #' @param order_type A string specifying order type
+#' @param buy_flag A boolean specifying flag
 #' @return A list contains rt_cd: return code, msg_cd: message code,
 #' msg1: message
 #'
@@ -31,7 +30,7 @@
 #' @return An order result
 kis_order <- function(stock_code, order_qty, order_price, prdt_code,
                       order_type = "00", buy_flag = TRUE) {
-  api_url <- "uapi/domestic-stock/v1/trading/order-cash"
+  api_url <- "/uapi/domestic-stock/v1/trading/order-cash"
   tr_id <- if (buy_flag) "TTTC0802U" else "TTTC0801U"
 
   if (missing(prdt_code))
@@ -49,14 +48,14 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
     "ALGO_NO" = ""
   ), as.character)
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    post_flag = TRUE, hash_flag = TRUE)
-  resp <- res |> resp_body_json()
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(resp)
-    } else if (resp$msg1 == "EGW00123") { # access token is expired.
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(res)
+    } else if (res$msg1 == "EGW00123") { # access token is expired.
       set_auth()
       kis_order(
         stock_code = stock_code, order_qty = order_qty,
@@ -64,10 +63,10 @@ kis_order <- function(stock_code, order_qty, order_price, prdt_code,
         order_type = order_type, buy_flag = buy_flag
       )
     } else {
-      return(resp)
+      raise_error(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
 
@@ -110,7 +109,7 @@ kis_sell <- function(stock_code, order_qty, order_price, prdt_code,
 #'
 #' @export
 get_orders <- function() {
-  api_url <- "uapi/domestic-stock/v1/trading/inquire-psbl-rvsecncl"
+  api_url <- "/uapi/domestic-stock/v1/trading/inquire-psbl-rvsecncl"
   tr_id <- "TTTC8036R"
 
   params <- list(
@@ -132,21 +131,21 @@ get_orders <- function() {
     "hashkey" = get_hash(params)
   )
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params,
                    hash_flag = TRUE)
-  resp <- res |> resp_body_json()
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(data.frame(data.table::rbindlist(resp$output)))
-    } else if (resp$msg_cd == "EGW00123") {
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(data.frame(data.table::rbindlist(res$output)))
+    } else if (res$msg_cd == "EGW00123") {
       set_auth()
       get_orders()
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
 
@@ -170,7 +169,7 @@ get_orders <- function() {
 #' @export
 get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
   # get_my_complete function at kis official git repo
-  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
+  api_url <- "/uapi/domestic-stock/v1/trading/inquire-daily-ccld"
   tr_id <- "TTTC8001R"
 
   if (missing(edt))
@@ -196,12 +195,12 @@ get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
     "CTX_AREA_NK100" = ""
   ), as.character)
 
-  res <- url_fetch(api_url, tr_id, params)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      output <- data.frame(data.table::rbindlist(resp$output1))
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      output <- data.frame(data.table::rbindlist(res$output1))
       if (zip_flag) {
         return(output[, c(
           "ord_dt", "orgn_odno", "sll_buy_dvsn_cd_name", "pdno", "ord_qty",
@@ -210,14 +209,14 @@ get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
       } else {
         return(output)
       }
-    } else if (resp$msg_cd == "EGW00123") { # access token is expired.
+    } else if (res$msg_cd == "EGW00123") { # access token is expired.
       set_auth()
       get_order_history()
     } else {
       return(resp)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
 
@@ -237,7 +236,7 @@ get_order_history <- function(sdt, edt, prdt_code, zip_flag = TRUE) {
 #'
 #' @export
 get_buyable_cash <- function(prdt_code) {
-  api_url <- "uapi/domestic-stock/v1/trading/inquire-daily-ccld"
+  api_url <- "/uapi/domestic-stock/v1/trading/inquire-daily-ccld"
   tr_id <- "TTTC8908R"
 
   if (missing(prdt_code))
@@ -253,19 +252,19 @@ get_buyable_cash <- function(prdt_code) {
     "OVRS_ICLD_YN" = "N"
   ), as.character)
 
-  res <- url_fetch(api_url, tr_id, params)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url, tr_id, params)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(as.numeric(resp$output$ord_psbl_cash))
-    } else if (resp$msg_cd == "EGW00123") { # access token is expired.
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(as.numeric(res$output$ord_psbl_cash))
+    } else if (res$msg_cd == "EGW00123") { # access token is expired.
       set_auth()
       get_buyable_cash()
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }

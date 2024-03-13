@@ -1,5 +1,6 @@
-#' Download kospi master file
+#' @title download kospi master file
 #'
+#' @description
 #' Download kospi_code.mst file.
 #'
 #' @param base_dir destination folder, if missing, current working directory.
@@ -26,8 +27,9 @@ download_kospi_master <- function(base_dir) {
   setwd(cwd)
 }
 
-#' Get kospi master data frame
+#' @title get kospi master data frame
 #'
+#' @description
 #' Get data from kospi_code.mst file.
 #'
 #' @param base_dir destination folder, if missing, current working directory.
@@ -174,6 +176,84 @@ get_kospi_master_dataframe <- function(base_dir) {
   if (nrow(df1) == nrow(df2))
     df <- cbind(df1, df2)
 
+  labels <- c(
+    "\\ub2e8\\ucd95\\ucf54\\ub4dc"
+  , "\\ud45c\\uc900\\ucf54\\ub4dc"
+  , "\\ud55c\\uae00\\uc885\\ubaa9\\uba85"
+  , "\uadf8\ub8f9\ucf54\ub4dc"
+  , "\uc2dc\uac00\ucd1d\uc561\uaddc\ubaa8"
+  , "\uc9c0\uc218\uc5c5\uc885\ub300\ubd84\ub958"
+  , "\uc9c0\uc218\uc5c5\uc885\uc911\ubd84\ub958"
+  , "\uc9c0\uc218\uc5c5\uc885\uc18c\ubd84\ub958"
+  , "\uc81c\uc870\uc5c5"
+  , "\uc800\uc720\ub3d9\uc131"
+  , "\uc9c0\ubc30\uad6c\uc870\uc9c0\uc218\uc885\ubaa9"
+  , "KOSPI200\uc139\ud130\uc5c5\uc885"
+  , "KOSPI100"
+  , "KOSPI50"
+  , "KRX"
+  , "ETP"
+  , "ELW\ubc1c\ud589"
+  , "KRX100"
+  , "KRX\uc790\ub3d9\ucc28"
+  , "KRX\ubc18\ub3c4\uccb4"
+  , "KRX\ubc14\uc774\uc624"
+  , "KRX\uc740\ud589"
+  , "SPAC"
+  , "KRX\uc5d0\ub108\uc9c0\ud654\ud559"
+  , "KRX\ucca0\uac15"
+  , "\ub2e8\uae30\uacfc\uc5f4"
+  , "KRX\ubbf8\ub514\uc5b4\ud1b5\uc2e0"
+  , "KRX\uac74\uc124"
+  , "Non1"
+  , "KRX\uc99d\uad8c"
+  , "KRX\uc120\ubc15"
+  , "KRX\uc139\ud130_\ubcf4\ud5d8"
+  , "KRX\uc139\ud130_\uc6b4\uc1a1"
+  , "SRI"
+  , "\uae30\uc900\uac00"
+  , "\ub9e4\ub9e4\uc218\ub7c9\ub2e8\uc704"
+  , "\uc2dc\uac04\uc678\uc218\ub7c9\ub2e8\uc704"
+  , "\uac70\ub798\uc815\uc9c0"
+  , "\uc815\ub9ac\ub9e4\ub9e4"
+  , "\uad00\ub9ac\uc885\ubaa9"
+  , "\uc2dc\uc7a5\uacbd\uace0"
+  , "\uacbd\uace0\uc608\uace0"
+  , "\ubd88\uc131\uc2e4\uacf5\uc2dc"
+  , "\uc6b0\ud68c\uc0c1\uc7a5"
+  , "\ub77d\uad6c\ubd84"
+  , "\uc561\uba74\ubcc0\uacbd"
+  , "\uc99d\uc790\uad6c\ubd84"
+  , "\uc99d\uac70\uae08\ube44\uc728"
+  , "\uc2e0\uc6a9\uac00\ub2a5"
+  , "\uc2e0\uc6a9\uae30\uac04"
+  , "\uc804\uc77c\uac70\ub798\ub7c9"
+  , "\uc561\uba74\uac00"
+  , "\uc0c1\uc7a5\uc77c\uc790"
+  , "\uc0c1\uc7a5\uc8fc\uc218"
+  , "\uc790\ubcf8\uae08"
+  , "\uacb0\uc0b0\uc6d4"
+  , "\uacf5\ubaa8\uac00"
+  , "\uc6b0\uc120\uc8fc"
+  , "\uacf5\ub9e4\ub3c4\uacfc\uc5f4"
+  , "\uc774\uc0c1\uae09\ub4f1"
+  , "KRX300"
+  , "KOSPI"
+  , "\ub9e4\ucd9c\uc561"
+  , "\uc601\uc5c5\uc774\uc775"
+  , "\uacbd\uc0c1\uc774\uc775"
+  , "\ub2f9\uae30\uc21c\uc774\uc775"
+  , "ROE"
+  , "\uae30\uc900\ub144\uc6d4"
+  , "\uc2dc\uac00\ucd1d\uc561"
+  , "\uadf8\ub8f9\uc0ac\ucf54\ub4dc"
+  , "\ud68c\uc0ac\uc2e0\uc6a9\ud55c\ub3c4\ucd08\uacfc"
+  , "\ub2f4\ubcf4\ub300\ucd9c\uac00\ub2a5"
+  , "\ub300\uc8fc\uac00\ub2a5"
+  )
+  labels <- stringi::stri_unescape_unicode(labels)
+  set_label(df, labels)
+
   file.remove(tmp_file1)
   file.remove(tmp_file2)
 
@@ -208,8 +288,9 @@ download_kosdaq_master <- function(base_dir) {
   setwd(cwd)
 }
 
-#' Get kosdaq master data frame
+#' @title get kosdaq master data frame
 #'
+#' @description
 #' Get data from kosdaq_code.mst file.
 #'
 #' @param base_dir destination folder, if missing, current working directory.
@@ -349,6 +430,78 @@ get_kosdaq_master_dataframe <- function(base_dir) {
 
   if (nrow(df1) == nrow(df2))
     df <- cbind(df1, df2)
+
+  labels <- c(
+    "\ub2e8\ucd95\ucf54\ub4dc"
+  , "\ud45c\uc900\ucf54\ub4dc"
+  , "\ud55c\uae00\uc885\ubaa9\uba85"
+  , "\uc99d\uad8c\uadf8\ub8f9\uad6c\ubd84\ucf54\ub4dc"
+  , "\uc2dc\uac00\ucd1d\uc561 \uaddc\ubaa8 \uad6c\ubd84 \ucf54\ub4dc \uc720\uac00"
+  , "\uc9c0\uc218\uc5c5\uc885 \ub300\ubd84\ub958 \ucf54\ub4dc"
+  , "\uc9c0\uc218 \uc5c5\uc885 \uc911\ubd84\ub958 \ucf54\ub4dc"
+  , "\uc9c0\uc218\uc5c5\uc885 \uc18c\ubd84\ub958 \ucf54\ub4dc"
+  , "\ubca4\ucc98\uae30\uc5c5 \uc5ec\ubd80 (Y/N)"
+  , "\uc800\uc720\ub3d9\uc131\uc885\ubaa9 \uc5ec\ubd80"
+  , "KRX \uc885\ubaa9 \uc5ec\ubd80"
+  , "ETP \uc0c1\ud488\uad6c\ubd84\ucf54\ub4dc"
+  , "KRX100 \uc885\ubaa9 \uc5ec\ubd80 (Y/N)"
+  , "KRX \uc790\ub3d9\ucc28 \uc5ec\ubd80"
+  , "KRX \ubc18\ub3c4\uccb4 \uc5ec\ubd80"
+  , "KRX \ubc14\uc774\uc624 \uc5ec\ubd80"
+  , "KRX \uc740\ud589 \uc5ec\ubd80"
+  , "\uae30\uc5c5\uc778\uc218\ubaa9\uc801\ud68c\uc0ac\uc5ec\ubd80"
+  , "KRX \uc5d0\ub108\uc9c0 \ud654\ud559 \uc5ec\ubd80"
+  , "KRX \ucca0\uac15 \uc5ec\ubd80"
+  , "\ub2e8\uae30\uacfc\uc5f4\uc885\ubaa9\uad6c\ubd84\ucf54\ub4dc"
+  , "KRX \ubbf8\ub514\uc5b4 \ud1b5\uc2e0 \uc5ec\ubd80"
+  , "KRX \uac74\uc124 \uc5ec\ubd80"
+  , "(\ucf54\uc2a4\ub2e5)\ud22c\uc790\uc8fc\uc758\ud658\uae30\uc885\ubaa9\uc5ec\ubd80"
+  , "KRX \uc99d\uad8c \uad6c\ubd84"
+  , "KRX \uc120\ubc15 \uad6c\ubd84"
+  , "KRX\uc139\ud130\uc9c0\uc218 \ubcf4\ud5d8\uc5ec\ubd80"
+  , "KRX\uc139\ud130\uc9c0\uc218 \uc6b4\uc1a1\uc5ec\ubd80"
+  , "KOSDAQ150\uc9c0\uc218\uc5ec\ubd80 (Y, N)"
+  , "\uc8fc\uc2dd \uae30\uc900\uac00"
+  , "\uc815\uaddc \uc2dc\uc7a5 \ub9e4\ub9e4 \uc218\ub7c9 \ub2e8\uc704"
+  , "\uc2dc\uac04\uc678 \uc2dc\uc7a5 \ub9e4\ub9e4 \uc218\ub7c9 \ub2e8\uc704"
+  , "\uac70\ub798\uc815\uc9c0 \uc5ec\ubd80"
+  , "\uc815\ub9ac\ub9e4\ub9e4 \uc5ec\ubd80"
+  , "\uad00\ub9ac \uc885\ubaa9 \uc5ec\ubd80"
+  , "\uc2dc\uc7a5 \uacbd\uace0 \uad6c\ubd84 \ucf54\ub4dc"
+  , "\uc2dc\uc7a5 \uacbd\uace0\uc704\ud5d8 \uc608\uace0 \uc5ec\ubd80"
+  , "\ubd88\uc131\uc2e4 \uacf5\uc2dc \uc5ec\ubd80"
+  , "\uc6b0\ud68c \uc0c1\uc7a5 \uc5ec\ubd80"
+  , "\ub77d\uad6c\ubd84 \ucf54\ub4dc"
+  , "\uc561\uba74\uac00 \ubcc0\uacbd \uad6c\ubd84 \ucf54\ub4dc"
+  , "\uc99d\uc790 \uad6c\ubd84 \ucf54\ub4dc"
+  , "\uc99d\uac70\uae08 \ube44\uc728"
+  , "\uc2e0\uc6a9\uc8fc\ubb38 \uac00\ub2a5 \uc5ec\ubd80"
+  , "\uc2e0\uc6a9\uae30\uac04"
+  , "\uc804\uc77c \uac70\ub798\ub7c9"
+  , "\uc8fc\uc2dd \uc561\uba74\uac00"
+  , "\uc8fc\uc2dd \uc0c1\uc7a5 \uc77c\uc790"
+  , "\uc0c1\uc7a5 \uc8fc\uc218(\ucc9c)"
+  , "\uc790\ubcf8\uae08"
+  , "\uacb0\uc0b0 \uc6d4"
+  , "\uacf5\ubaa8 \uac00\uaca9"
+  , "\uc6b0\uc120\uc8fc \uad6c\ubd84 \ucf54\ub4dc"
+  , "\uacf5\ub9e4\ub3c4\uacfc\uc5f4\uc885\ubaa9\uc5ec\ubd80"
+  , "\uc774\uc0c1\uae09\ub4f1\uc885\ubaa9\uc5ec\ubd80"
+  , "KRX300 \uc885\ubaa9 \uc5ec\ubd80 (Y/N)"
+  , "\ub9e4\ucd9c\uc561"
+  , "\uc601\uc5c5\uc774\uc775"
+  , "\uacbd\uc0c1\uc774\uc775"
+  , "\ub2e8\uae30\uc21c\uc774\uc775"
+  , "ROE(\uc790\uae30\uc790\ubcf8\uc774\uc775\ub960)"
+  , "\uae30\uc900\ub144\uc6d4"
+  , "\uc804\uc77c\uae30\uc900 \uc2dc\uac00\ucd1d\uc561 (\uc5b5)"
+  , "\uadf8\ub8f9\uc0ac \ucf54\ub4dc"
+  , "\ud68c\uc0ac\uc2e0\uc6a9\ud55c\ub3c4\ucd08\uacfc\uc5ec\ubd80"
+  , "\ub2f4\ubcf4\ub300\ucd9c\uac00\ub2a5\uc5ec\ubd80"
+  , "\ub300\uc8fc\uac00\ub2a5\uc5ec\ubd80"
+  )
+  labels <- stringi::stri_unescape_unicode(labels)
+  set_label(df, labels)
 
   file.remove(tmp_file1)
   file.remove(tmp_file2)

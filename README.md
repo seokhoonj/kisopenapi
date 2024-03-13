@@ -99,6 +99,10 @@ readRenviron("~/.Renviron") # alternatively, .rs.restartR()
 get_balance() # details (data.frame)
 get_balance(rt_cash_flag = TRUE) # total deposit (numeric)
 
+# get current index (KOSPI: "0001", KOSDAQ: "1001", KOSPI200: "2001")
+# 지수 데이터 추출 (코스피: "0001", 코스닥: "1001", 코스피200: "2001")
+get_current_index("0001")
+
 # get current price (samsung electronics)
 # 가격 데이터 추출 (삼성전자)
 get_current_price("005930")
@@ -126,11 +130,15 @@ get_buyable_cash()
 
 # buy
 # 매수
-kis_buy(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
+kis_buy(stock_code = "005930", order_qty = 1, order_price = "price_you_want", order_type = "00")
+# 시장가 매수
+kis_buy(stock_code = "005930", order_qty = 1, order_price = 0, order_type = "01")
 
 # sell
 # 매도
-kis_sell(stock_code = "005930", order_qty = 1, order_price = "price_you_want")
+kis_sell(stock_code = "005930", order_qty = 1, order_price = "price_you_want", order_type = "00")
+# 시장가 매도
+kis_sell(stock_code = "005930", order_qty = 1, order_price = 0, order_type = "01")
 
 # get orders
 # 주문 내역
@@ -185,8 +193,8 @@ download_kospi_master()
 kospi_master <- get_kospi_master_dataframe()
 
 # can check English and Korean column names of kospi master file 
-# 컬럼명을 확인할 수 있다 
-kospi_master_columns
+# 컬럼명과 컬럼레이블을 확인할 수 있다 
+View(kospi_master_columns)
 ```
 
 ### kosdaq master
@@ -201,8 +209,15 @@ download_kosdaq_master()
 kosdaq_master <- get_kosdaq_master_dataframe()
 
 # can check English and Korean column names of kosdaq master file 
-# 컬럼명을 확인할 수 있다 
-kosdaq_master_columns
+# 컬럼명과 컬럼레이블을 확인할 수 있다 
+View(kosdaq_master_columns)
+```
+
+### get current index
+```r
+# get current index (KOSPI: "0001", KOSDAQ: "1001", KOSPI200: "2001")
+# 지수 데이터 추출 (코스피: "0001", 코스닥: "1001", 코스피200: "2001")
+get_current_index("0001")
 ```
 
 ## Reference

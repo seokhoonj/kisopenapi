@@ -8,6 +8,8 @@
 
 * `kospi_master_columns` and `kosdaq_master_columns` datasets contain English and Korean column names.
 
+* `get_current_index()` function is added. the index_code argument can be (KOSPI: "0001", KOSDAQ: "1001", KOSPI200: "2001")
+
 ## bug fixes
 
 * modified typo .Reviron -> .Renviron and added `usethis::edit_r_environ()` for the environment variable checking error messages.

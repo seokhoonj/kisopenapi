@@ -6,7 +6,6 @@
 *.xlsb
 *.xlsm
 *.xlsx
-kospi_code.mst.zip
-kospi_code.mst
-kosdaq_code.mst.zip
-kosdaq_code.mst
+*.mst
+*.zip
+*.COD

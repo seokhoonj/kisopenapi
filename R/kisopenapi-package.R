@@ -42,9 +42,11 @@
 #'
 #' @keywords internal
 #' @importFrom cli style_hyperlink
-#' @importFrom data.table data.table rbindlist shift
+#' @importFrom data.table data.table rbindlist setattr shift
 #' @importFrom httr2 req_body_json req_error req_headers req_perform
 #'  req_url_query request resp_body_json
 #' @importFrom jsonlite toJSON
-#' @importFrom utils download.file globalVariables head read.csv read.fwf tail unzip
+#' @importFrom stringi stri_unescape_unicode
+#' @importFrom utils download.file globalVariables head read.csv read.fwf
+#'  read.table tail unzip
 "_PACKAGE"

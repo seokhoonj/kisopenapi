@@ -43,7 +43,7 @@ get_hash <- function(params) {
 url_fetch <- function(api_url, tr_id, params, append_headers, post_flag = FALSE,
                       hash_flag = TRUE, is_paper = FALSE) {
   base_url <- get_base_url()
-  url <- sprintf("%s/%s", base_url = base_url, api_url = api_url)
+  url <- sprintf("%s%s", base_url, api_url)
 
   is_paper <- is_paper_trading()
   if (is_paper) {
@@ -80,4 +80,20 @@ url_fetch <- function(api_url, tr_id, params, append_headers, post_flag = FALSE,
       req_url_query(!!!params) |> req_perform()
   }
   return(res)
+}
+
+raise_error <- function(resp) {
+  if (resp$rt_cd != "0") {
+    stop(resp$rt_cd, " ", resp$msg_cd, " ", resp$msg1)
+  }
+}
+
+set_label <- function(df, labels, cols) {
+  if (missing(cols))
+    cols <- names(df)
+  if (length(cols) != length(labels))
+    stop("the length of columns and the length of labels are different.")
+  lapply(seq_along(cols), function(x)
+    data.table::setattr(df[[cols[[x]]]], "label", labels[[x]]))
+  invisible(df)
 }

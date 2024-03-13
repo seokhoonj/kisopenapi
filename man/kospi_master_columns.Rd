@@ -14,7 +14,7 @@ kospi_master_columns
 kosdaq_master_columns
 }
 \description{
-These datassets contain both English and Korean column names.
+These datasets contain both English and Korean column names.
 }
 \examples{
 kospi_master_columns

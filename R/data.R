@@ -14,7 +14,7 @@
 #'
 #' @export
 get_current_price <- function(stock_code) {
-  api_url <- "uapi/domestic-stock/v1/quotations/inquire-price"
+  api_url <- "/uapi/domestic-stock/v1/quotations/inquire-price"
   tr_id <- "FHKST01010100"
 
   params <- list(
@@ -22,22 +22,25 @@ get_current_price <- function(stock_code) {
     "fid_input_iscd" = stock_code
   )
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(data.frame(resp$output))
-    } else if (resp$msg_cd == "EGW00123") {
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(data.frame(res$output))
+    } else if (res$msg_cd == "EGW00123") {
       set_auth()
       get_current_price(stock_code)
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
+
+# get_stock_price <- function(stock_code)
+#   get_current_price(stock_code = stock_code)
 
 #' @title get stock quotes
 #'
@@ -56,7 +59,7 @@ get_current_price <- function(stock_code) {
 #' @export
 get_stock_quotes <- function(stock_code) {
   # get_stock_completed function at kis official git repo
-  api_url <- "uapi/domestic-stock/v1/quotations/inquire-ccnl"
+  api_url <- "/uapi/domestic-stock/v1/quotations/inquire-ccnl"
   tr_id <- "FHKST01010300"
 
   params <- lapply(list(
@@ -64,20 +67,20 @@ get_stock_quotes <- function(stock_code) {
     "FID_INPUT_ISCD" = stock_code
   ), as.character)
 
-  res <- url_fetch(api_url, tr_id, params)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url, tr_id, params)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      return(data.frame(data.table::rbindlist(resp$output)))
-    } else if (resp$msg_cd == "EGW00123") {
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      return(data.frame(data.table::rbindlist(res$output)))
+    } else if (res$msg_cd == "EGW00123") {
       set_auth()
       get_stock_quotes(stock_code)
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }
 
@@ -98,7 +101,7 @@ get_stock_quotes <- function(stock_code) {
 #'
 #' @export
 get_stock_history <- function(stock_code, unit = c("D", "W", "M")) {
-  api_url <- "uapi/domestic-stock/v1/quotations/inquire-daily-price"
+  api_url <- "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
   tr_id <- "FHKST01010400"
 
   params <- list(
@@ -178,7 +181,7 @@ get_stock_history_by_ohlcv <- function(stock_code, unit = "D",
 #'
 #' @export
 get_stock_investor <- function(stock_code) {
-  api_url <- "uapi/domestic-stock/v1/quotations/inquire-investor"
+  api_url <- "/uapi/domestic-stock/v1/quotations/inquire-investor"
   tr_id <- "FHKST01010900"
 
   params <- list(
@@ -186,12 +189,12 @@ get_stock_investor <- function(stock_code) {
     "FID_INPUT_ISCD" = stock_code
   )
 
-  res <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
-  resp <- res |> resp_body_json()
+  resp <- url_fetch(api_url = api_url, tr_id = tr_id, params = params)
+  res <- resp |> resp_body_json()
 
-  if (res$status_code == 200) {
-    if (resp$rt_cd == "0") {
-      df <- data.frame(data.table::rbindlist(resp$output))
+  if (resp$status_code == 200) {
+    if (res$rt_cd == "0") {
+      df <- data.frame(data.table::rbindlist(res$output))
       if (nrow(df) > 0) {
         chosend_fld <- c("stck_bsop_date", "prsn_ntby_qty", "frgn_ntby_qty",
                          "orgn_ntby_qty")
@@ -203,13 +206,13 @@ get_stock_investor <- function(stock_code) {
         df$etcbuy <- (df$perbuy + df$forbuy + df$orgbuy) * -1
       }
       return(df)
-    } else if (resp$msg_cd == "EGW00123") {
+    } else if (res$msg_cd == "EGW00123") {
       set_auth()
       get_stock_investor(stock_code)
     } else {
-      return(resp)
+      return(res)
     }
   } else {
-    return(res$status_code)
+    return(resp$status_code)
   }
 }

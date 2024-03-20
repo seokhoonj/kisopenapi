@@ -2,23 +2,31 @@
 % Please edit documentation in R/master.R
 \name{get_kospi_master_dataframe}
 \alias{get_kospi_master_dataframe}
-\title{get kospi master data frame}
+\alias{get_kosdaq_master_dataframe}
+\title{get KOSPI (KOSDAQ) master data frame}
 \usage{
 get_kospi_master_dataframe(base_dir)
+
+get_kosdaq_master_dataframe(base_dir)
 }
 \arguments{
 \item{base_dir}{destination folder, if missing, current working directory.}
 }
 \value{
-kospi master data frame
+KOSPI (KOSDAQ) master dataframe
 }
 \description{
-Get data from kospi_code.mst file.
+Get data from kospi_code.mst (kosdaq_code.mst) file.
 }
 \examples{
-# get kospi master data frame
-\dontrun{kospi_master_download()
-get_kospi_master_dataframe()
-}
+# get kospi master dataframe
+\dontrun{
+download_kospi_master()
+get_kospi_master_dataframe()}
+
+# get kosdaq master dataframe
+\dontrun{
+download_kosdaq_master()
+get_kosdaq_master_dataframe()}
 
 }

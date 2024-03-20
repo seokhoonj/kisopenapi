@@ -2,21 +2,29 @@
 % Please edit documentation in R/master.R
 \name{download_kospi_master}
 \alias{download_kospi_master}
-\title{download kospi master file}
+\alias{download_kosdaq_master}
+\title{Download KOSPI (KOSDAQ) master file}
 \usage{
 download_kospi_master(base_dir)
+
+download_kosdaq_master(base_dir)
 }
 \arguments{
 \item{base_dir}{destination folder, if missing, current working directory.}
 }
 \value{
-no return.
+no return value
 }
 \description{
-Download kospi_code.mst file.
+Download kospi_code.mst (kosdaq_code.mst) file.
 }
 \examples{
 # download kospi_code.mst
-\dontrun{download_kospi_master()}
+\dontrun{
+download_kospi_master()}
+
+# download kosdaq_code.mst
+\dontrun{
+download_kosdaq_master()}
 
 }

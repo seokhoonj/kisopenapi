@@ -2,9 +2,9 @@
 
 ## new features
 
-* `kospi_master_download()` and `get_kospi_master_dataframe()` functions are added. if you execute these two functions sequentially, you can obtain the KOSPI master data frame. and it contains a lot of informations.
+* `download_kospi_master()` and `get_kospi_master_dataframe()` functions are added. if you execute these two functions sequentially, you can obtain the KOSPI master data frame. and it contains a lot of informations. `get_kospi_master()` function combines these two functions.
 
-* `kosdaq_master_download()` and `get_kosdaq_master_dataframe()` functions are same as above.
+* `download_kosdaq_master()` and `get_kosdaq_master_dataframe()` functions are same as above. `get_kosdaq_master()` function combines these two functions.
 
 * `kospi_master_columns` and `kosdaq_master_columns` datasets contain English and Korean column names.
 

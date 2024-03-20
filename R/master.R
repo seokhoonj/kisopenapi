@@ -1,15 +1,20 @@
-#' @title download kospi master file
+#' @title Download KOSPI (KOSDAQ) master file
 #'
 #' @description
-#' Download kospi_code.mst file.
+#' Download kospi_code.mst (kosdaq_code.mst) file.
 #'
 #' @param base_dir destination folder, if missing, current working directory.
 #'
-#' @return no return.
+#' @return no return value
 #'
 #' @examples
 #' # download kospi_code.mst
-#' \dontrun{download_kospi_master()}
+#' \dontrun{
+#' download_kospi_master()}
+#'
+#' # download kosdaq_code.mst
+#' \dontrun{
+#' download_kosdaq_master()}
 #'
 #' @export
 download_kospi_master <- function(base_dir) {
@@ -18,7 +23,7 @@ download_kospi_master <- function(base_dir) {
   if (!missing(base_dir)) {
     if (!dir.exists(base_dir))
       dir.create(base_dir)
-    setwd(sprintf("%s/%s", cwd, base_dir))
+    setwd(base_dir)
     message("change directory to ", base_dir)
   }
   download.file(url, destfile = "kospi_code.mst.zip")
@@ -27,20 +32,42 @@ download_kospi_master <- function(base_dir) {
   setwd(cwd)
 }
 
-#' @title get kospi master data frame
+#' @rdname download_kospi_master
+#' @export
+download_kosdaq_master <- function(base_dir) {
+  cwd <- getwd()
+  url <- "https://new.real.download.dws.co.kr/common/master/kosdaq_code.mst.zip"
+  if (!missing(base_dir)) {
+    if (!dir.exists(base_dir))
+      dir.create(base_dir)
+    setwd(base_dir)
+    message("change directory to ", base_dir)
+  }
+  download.file(url, destfile = "kosdaq_code.mst.zip")
+  unzip("kosdaq_code.mst.zip")
+  file.remove("kosdaq_code.mst.zip")
+  setwd(cwd)
+}
+
+#' @title get KOSPI (KOSDAQ) master data frame
 #'
 #' @description
-#' Get data from kospi_code.mst file.
+#' Get data from kospi_code.mst (kosdaq_code.mst) file.
 #'
 #' @param base_dir destination folder, if missing, current working directory.
 #'
-#' @return kospi master data frame
+#' @return KOSPI (KOSDAQ) master dataframe
 #'
 #' @examples
-#' # get kospi master data frame
-#' \dontrun{kospi_master_download()
-#' get_kospi_master_dataframe()
-#' }
+#' # get kospi master dataframe
+#' \dontrun{
+#' download_kospi_master()
+#' get_kospi_master_dataframe()}
+#'
+#' # get kosdaq master dataframe
+#' \dontrun{
+#' download_kosdaq_master()
+#' get_kosdaq_master_dataframe()}
 #'
 #' @export
 get_kospi_master_dataframe <- function(base_dir) {
@@ -260,49 +287,7 @@ get_kospi_master_dataframe <- function(base_dir) {
   return(df)
 }
 
-#' Download kosdaq master file
-#'
-#' Download kosdaq_code.mst file.
-#'
-#' @param base_dir destination folder, if missing, current working directory.
-#'
-#' @return no return.
-#'
-#' @examples
-#' # download kosdaq_code.mst
-#' \dontrun{download_kosdaq_master()}
-#'
-#' @export
-download_kosdaq_master <- function(base_dir) {
-  cwd <- getwd()
-  url <- "https://new.real.download.dws.co.kr/common/master/kosdaq_code.mst.zip"
-  if (!missing(base_dir)) {
-    if (!dir.exists(base_dir))
-      dir.create(base_dir)
-    setwd(sprintf("%s/%s", cwd, base_dir))
-    message("change directory to ", base_dir)
-  }
-  download.file(url, destfile = "kosdaq_code.mst.zip")
-  unzip("kosdaq_code.mst.zip")
-  file.remove("kosdaq_code.mst.zip")
-  setwd(cwd)
-}
-
-#' @title get kosdaq master data frame
-#'
-#' @description
-#' Get data from kosdaq_code.mst file.
-#'
-#' @param base_dir destination folder, if missing, current working directory.
-#'
-#' @return kosdaq master data frame
-#'
-#' @examples
-#' # get kosdaq master data frame
-#' \dontrun{kosdaq_master_download()
-#' get_kosdaq_master_dataframe()
-#' }
-#'
+#' @rdname get_kospi_master_dataframe
 #' @export
 get_kosdaq_master_dataframe <- function(base_dir) {
   cwd <- getwd()
@@ -507,4 +492,37 @@ get_kosdaq_master_dataframe <- function(base_dir) {
   file.remove(tmp_file2)
 
   return(df)
+}
+
+#' @title Get KOSPI (KOSDAQ) master
+#'
+#' @description
+#' Download KOSPI (KOSDAQ) master file in temp directory and get the data from the file
+#'
+#' @return a data.frame
+#'
+#' @examples
+#' # get kospi master
+#' \dontrun{
+#' kospi <- get_kospi_master()
+#' View(kospi)}
+#'
+#' # get kosdaq master
+#' \dontrun{
+#' kosdaq <- get_kosdaq_master()
+#' View(kosdaq)}
+#'
+#' @export
+get_kospi_master <- function() {
+  base_dir <- tempdir()
+  download_kospi_master(base_dir)
+  get_kospi_master_dataframe(base_dir)
+}
+
+#' @rdname get_kospi_master
+#' @export
+get_kosdaq_master <- function() {
+  base_dir <- tempdir()
+  download_kosdaq_master(base_dir)
+  get_kosdaq_master_dataframe(base_dir)
 }
